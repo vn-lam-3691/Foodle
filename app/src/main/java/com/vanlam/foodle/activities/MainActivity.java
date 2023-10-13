@@ -1,8 +1,11 @@
-package com.vanlam.foodle;
+package com.vanlam.foodle.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.WindowManager;
+
+import com.vanlam.foodle.R;
 
 public class MainActivity extends AppCompatActivity {
 
