@@ -65,7 +65,7 @@ public class SlideActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 }
                 else {
-                    Intent intent = new Intent(SlideActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SlideActivity.this, SignInActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">Foodle</string>
     <string name="tiep_tuc">Tiếp tục</string>
+
+    //Trang đăng nhập và đăng kí
+    <string name="chao_mung_tro_lai">Chào mừng trở lại</string>
+    <string name="dang_nhap_vao_tk">đăng nhập vào tài khoản của bạn</string>
+    <string name="sdt">Số điện thoại</string>
+    <string name="mat_khau">Mật khẩu</string>
+    <string name="dang_nhap">ĐĂNG NHẬP</string>
+    <string name="chua_co_tai_khoan">Chưa có tài khoản?</string>
+    <string name="dang_ky_ngay">Đăng ký ngay</string>
+    <string name="or_dang_nhap_voi">hoặc đăng nhập với</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+    <string name="ten_cua_ban">Tên của bạn</string>
+    <string name="chua_co_tk">Chưa có tài khoản?</string>
+    <string name="dang_ky_ngay_nao">đăng ký ngay nào!</string>
+    <string name="dang_ky">ĐĂNG KÝ</string>
+    <string name="da_co_tk">Đã có tài khoản?</string>
+    <string name="or_dang_ky_voi">hoặc đăng ký với</string>
 </resources>
