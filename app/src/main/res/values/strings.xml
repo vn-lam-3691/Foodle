@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Foodle Temp</string>
+    <string name="app_name">Foodle</string>
     <string name="tiep_tuc">Tiếp tục</string>
     <string name="chao_mung_tro_lai">Chào mừng trở lại</string>
     <string name="dang_nhap_vao_tk">đăng nhập vào tài khoản của bạn</string>
