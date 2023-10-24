@@ -1,6 +1,7 @@
 package com.vanlam.foodle.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,20 +20,24 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.vanlam.foodle.R;
+import com.vanlam.foodle.activities.FoodDetailActivity;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
+import com.vanlam.foodle.listeners.FoodItemListener;
 import com.vanlam.foodle.models.Food;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Fragment nằm trong ViewPager để hiển thị tất cả Product
-public class FoodListAllFragment extends Fragment {
+public class FoodListAllFragment extends Fragment implements FoodItemListener {
+    public static final int REQUEST_CODE_VIEW_FOOD = 1;
     private List<Food> foodListAll;
     private RecyclerView rcvFoodListAll;
     private FoodItemAdapter foodItemAdapter;
     private FragmentManager fragmentManager;
     private Context mContext;
     private View rootView;
+    private int foodItemPosition = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,9 +68,18 @@ public class FoodListAllFragment extends Fragment {
         foodListAll.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
 
-        foodItemAdapter = new FoodItemAdapter(foodListAll);
+        foodItemAdapter = new FoodItemAdapter(foodListAll, this);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rcvFoodListAll.setLayoutManager(staggeredGridLayoutManager);
         rcvFoodListAll.setAdapter(foodItemAdapter);
+    }
+
+    @Override
+    public void onClick(View view, Food foodItem, int position) {
+        foodItemPosition = position;
+        Intent intent = new Intent(getContext(), FoodDetailActivity.class);
+        intent.putExtra("food", foodItem);
+        startActivityForResult(intent, REQUEST_CODE_VIEW_FOOD);
+        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }

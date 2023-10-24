@@ -17,7 +17,6 @@
     <string name="dang_ky">ĐĂNG KÝ</string>
     <string name="da_co_tk">Đã có tài khoản?</string>
     <string name="or_dang_ky_voi">hoặc đăng ký với</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Nhà</string>
     <string name="food_list">Chọn món</string>
@@ -28,4 +27,16 @@
     <string name="hint_search">Tìm kiếm đồ uống, ăn nhẹ</string>
     <string name="text_button">Chọn món</string>
     <string name="goi_y_rieng">Gợi ý riêng cho bạn</string>
+    <string name="tong_tien">Tổng tiền</string>
+    <string name="them_vao_gio">Thêm vào giỏ</string>
+    <string name="detail_product">Chi tiết sản phẩm</string>
+    <string name="chon_size">Chọn size</string>
+    <string name="s">S</string>
+    <string name="m">M</string>
+    <string name="l">L</string>
+    <string name="mo_ta">Mô tả</string>
+    <string name="food_description">Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê.</string>
+    <string name="food_name">Caramel Macchiato đá</string>
+    <string name="food_price">55.000đ</string>
+    <string name="so_luong">Số lượng</string>
 </resources>

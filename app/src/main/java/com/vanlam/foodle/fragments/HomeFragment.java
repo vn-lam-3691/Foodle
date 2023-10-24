@@ -1,5 +1,6 @@
 package com.vanlam.foodle.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,22 +16,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vanlam.foodle.R;
+import com.vanlam.foodle.activities.FoodDetailActivity;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
 import com.vanlam.foodle.adapters.FoodSuggestAdapter;
 import com.vanlam.foodle.adapters.VoucherAdapter;
+import com.vanlam.foodle.listeners.FoodItemListener;
 import com.vanlam.foodle.models.Food;
 import com.vanlam.foodle.models.Voucher;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements FoodItemListener {
+    public static final int REQUEST_CODE_VIEW_FOOD = 1;
     private RecyclerView recyclerViewFoodList, recyclerViewFoodSuggest, recyclerViewVoucher;
     private FoodItemAdapter foodItemAdapter;
     private FoodSuggestAdapter foodSuggestAdapter;
     private VoucherAdapter voucherAdapter;
     private List<Food> listFood, listSuggestList;
     private List<Voucher> listVoucher;
+    private int foodItemPosition = -1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +71,7 @@ public class HomeFragment extends Fragment {
         listSuggestList.addAll(listFood);
 
         recyclerViewFoodList = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_foodList);
-        foodItemAdapter = new FoodItemAdapter(listFood);
+        foodItemAdapter = new FoodItemAdapter(listFood, this);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerViewFoodList.setLayoutManager(staggeredGridLayoutManager);
         recyclerViewFoodList.setAdapter(foodItemAdapter);
@@ -89,5 +94,14 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewVoucher.setLayoutManager(linearLayoutManager2);
         recyclerViewVoucher.setAdapter(voucherAdapter);
+    }
+
+    @Override
+    public void onClick(View view, Food foodItem, int position) {
+        foodItemPosition = position;
+        Intent intent = new Intent(getContext(), FoodDetailActivity.class);
+        intent.putExtra("food", foodItem);
+        startActivityForResult(intent, REQUEST_CODE_VIEW_FOOD);
+        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }
