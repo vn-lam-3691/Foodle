@@ -1,8 +1,6 @@
 <resources>
-    <string name="app_name">Foodle</string>
+    <string name="app_name">Foodle Temp</string>
     <string name="tiep_tuc">Tiếp tục</string>
-
-    //Trang đăng nhập và đăng kí
     <string name="chao_mung_tro_lai">Chào mừng trở lại</string>
     <string name="dang_nhap_vao_tk">đăng nhập vào tài khoản của bạn</string>
     <string name="sdt">Số điện thoại</string>
@@ -19,4 +17,15 @@
     <string name="dang_ky">ĐĂNG KÝ</string>
     <string name="da_co_tk">Đã có tài khoản?</string>
     <string name="or_dang_ky_voi">hoặc đăng ký với</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Nhà</string>
+    <string name="food_list">Chọn món</string>
+    <string name="my_cart">Giỏ hàng</string>
+    <string name="myAccount">Tôi</string>
+    <string name="delivery_to">Vận chuyển đến</string>
+    <string name="location_example">Hoàng Diệu, Hải Châu, Đà Nẵng</string>
+    <string name="hint_search">Tìm kiếm đồ uống, ăn nhẹ</string>
+    <string name="text_button">Chọn món</string>
+    <string name="goi_y_rieng">Gợi ý riêng cho bạn</string>
 </resources>
