@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_bold"
             android:includeFontPadding="false"
-            android:text="55.000đ"
+            android:text="110.000đ"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintBottom_toBottomOf="@id/txt_totalMoney"

@@ -52,17 +52,15 @@ public class HomeFragment extends Fragment implements FoodItemListener {
         super.onViewCreated(view, savedInstanceState);
 
         listFood = new ArrayList<>();
-        listFood.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
+        listFood.add(new Food(R.drawable.ca_phe_suada, "Cà phê sữa đá", 39000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
+        listFood.add(new Food(R.drawable.tra_den_macchato, "Trà đen Macchiato", 45000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
+        listFood.add(new Food(R.drawable.capuchino_nong, "Capuchino nóng", 39000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
+        listFood.add(new Food(R.drawable.tra_dao_kobumcha, "Trà đào Kobumcha", 55000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
+        listFood.add(new Food(R.drawable.tra_sen_nong, "Trà sen nóng", 49000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
         listFood.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
@@ -84,9 +82,9 @@ public class HomeFragment extends Fragment implements FoodItemListener {
 
         listVoucher = new ArrayList<>();
         listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
+        listVoucher.add(new Voucher(R.drawable.img_voucher_2, "Freeship đồng giá 39K", "Mua 1 tặng 1 dành cho bạn mới"));
         listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
+        listVoucher.add(new Voucher(R.drawable.img_voucher_2, "Freeship đồng giá 39K", "Mua 1 tặng 1 dành cho bạn mới"));
         listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
 
         recyclerViewVoucher = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_vouchers);

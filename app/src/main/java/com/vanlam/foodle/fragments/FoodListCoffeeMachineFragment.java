@@ -55,9 +55,11 @@ public class FoodListCoffeeMachineFragment extends Fragment implements FoodItemL
         foodListCfMachine = new ArrayList<>();
         foodListCfMachine.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListCfMachine.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
+        foodListCfMachine.add(new Food(R.drawable.bac_xiu, "Bạc xỉu", 35000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListCfMachine.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
+        foodListCfMachine.add(new Food(R.drawable.capuchino_nong, "Capuchino nóng", 45000,
+                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
+        foodListCfMachine.add(new Food(R.drawable.ca_phe_suada, "Cà phê sữa đá", 35000,
                 "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
 
         foodItemAdapter = new FoodItemAdapter(foodListCfMachine, this);

@@ -49,10 +49,10 @@ public class CartFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         listItemCart = new ArrayList<>();
-        listItemCart.add(new Cart(R.drawable.img_food_item, 1, "Caramel Macchiato đá", "S", 55000d, true));
-        listItemCart.add(new Cart(R.drawable.img_food_item, 2, "Capuchino nóng", "M", 39000d, false));
-        listItemCart.add(new Cart(R.drawable.img_food_item, 1, "Bạc sỉu", "L", 29000d, false));
-        listItemCart.add(new Cart(R.drawable.img_food_item, 4, "Latte đá", "M", 49000d, false));
+        listItemCart.add(new Cart(R.drawable.img_food_item, 2, "Caramel Macchiato đá", "S", 55000d, true));
+        listItemCart.add(new Cart(R.drawable.capuchino_nong, 2, "Capuchino nóng", "M", 39000d, false));
+        listItemCart.add(new Cart(R.drawable.bac_xiu, 1, "Bạc sỉu", "L", 29000d, false));
+        listItemCart.add(new Cart(R.drawable.latte_da, 4, "Latte đá", "M", 49000d, false));
 
         tvTotalMoney = view.findViewById(R.id.tv_totalMoney);
         btnCheckout = view.findViewById(R.id.btn_checkout);
