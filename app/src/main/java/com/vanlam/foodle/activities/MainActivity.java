@@ -13,10 +13,12 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.fragments.FoodListFragment;
 import com.vanlam.foodle.fragments.HomeFragment;
+import com.vanlam.foodle.fragments.CartFragment;
 
 public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private FoodListFragment foodListFragment;
+    private CartFragment cartFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         homeFragment = new HomeFragment();
         foodListFragment = new FoodListFragment();
+        cartFragment = new CartFragment();
         setFragment(homeFragment);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         setFragment(foodListFragment);
                         break;
                     case R.id.menu_item_cart:
-                        Toast.makeText(MainActivity.this, "Cart screen is show", Toast.LENGTH_SHORT).show();
+                        setFragment(cartFragment);
                         break;
                     case R.id.menu_item_account:
                         Toast.makeText(MainActivity.this, "My account screen is show", Toast.LENGTH_SHORT).show();

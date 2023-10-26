@@ -11,4 +11,5 @@
     <color name="colorBackgroundOpacity">#FFF9F5</color>
     <color name="colorBackgroundInputSearch">#F6F6F6</color>
     <color name="colorButtonOpacity">#FFEBDE</color>
+    <color name="colorBackgroundCheckout">#F8F8F8</color>
 </resources>
