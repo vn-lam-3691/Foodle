@@ -37,13 +37,13 @@ public class CheckOutActivity extends AppCompatActivity {
         SpannableString content = new SpannableString("Thay đổi");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         tvChangeLocation.setText(content);
-/*        tvChangeLocation.setOnClickListener(new View.OnClickListener() {
+        tvChangeLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CheckOutActivity.this, UserInfomationActivity.class);
+                Intent intent = new Intent(CheckOutActivity.this, UserInformationActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_CHANGE_USER_INFORMATION);
             }
-        });*/
+        });
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,13 +59,13 @@ public class CheckOutActivity extends AppCompatActivity {
             }
         });
 
-        /*layoutMoreVoucher.setOnClickListener(new View.OnClickListener() {
+        layoutMoreVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CheckOutActivity.this, ManageVoucherActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_PICK_VOUCHER);
             }
-        });*/
+        });
     }
 
     @Override

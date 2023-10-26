@@ -1,10 +1,12 @@
 package com.vanlam.foodle.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Voucher implements Serializable {
-    private int imagePath;
+    private int imagePath, type;
     private String title, description;
+    private Date expiry;
 
     public Voucher() {
     }
@@ -13,6 +15,14 @@ public class Voucher implements Serializable {
         this.imagePath = imagePath;
         this.title = title;
         this.description = description;
+    }
+
+    public Voucher(int imagePath, String title, String description, Date expiry, int type) {
+        this.imagePath = imagePath;
+        this.title = title;
+        this.description = description;
+        this.expiry = expiry;
+        this.type = type;
     }
 
     public int getImagePath() {
@@ -37,5 +47,21 @@ public class Voucher implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getExpiry() {
+        return expiry;
+    }
+
+    public void setExpiry(Date expiry) {
+        this.expiry = expiry;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }
