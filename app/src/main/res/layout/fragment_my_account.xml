@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.MyAccountFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.042" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.958" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/background_top_account"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineHoriz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_avatar"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/avatar"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineHoriz"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/inter_semibold"
+            android:includeFontPadding="false"
+            android:text="@string/name_acc_test"
+            android:textColorHint="@color/colorTextPrimary"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_ranking"
+            app:layout_constraintStart_toEndOf="@id/image_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tv_ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/inter_regular"
+            android:includeFontPadding="false"
+            android:text="@string/txt_ranking"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineHoriz"
+            app:layout_constraintStart_toStartOf="@id/name_account"
+            app:layout_constraintTop_toBottomOf="@+id/name_account" />
+
+        <ImageView
+            android:id="@+id/image_sign_out"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:src="@drawable/ic_sign_out"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineHoriz"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="@id/guidelineHoriz"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd">
+
+            <LinearLayout
+                android:id="@+id/layout_history_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_cart_history"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/lich_su_don_hang"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextPrimary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_my_voucher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_voucher"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/my_voucher"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextPrimary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_item_favorite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_favorite_2"
+                    app:tint="@color/colorTextPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/list_favorite"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextPrimary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_notification"
+                    app:tint="@color/colorTextPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/my_notification"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextPrimary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_comment"
+                    app:tint="@color/colorTextPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/contact"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextPrimary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_my_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_menu_person"
+                    app:tint="@color/colorTextPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/my_info"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextPrimary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_saved_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_saved_location"
+                    app:tint="@color/colorTextPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/saved_location"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextPrimary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_settings"
+                    app:tint="@color/colorTextPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/txt_settings"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextPrimary"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

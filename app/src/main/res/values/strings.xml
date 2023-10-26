@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Foodle</string>
+    <string name="app_name">Foodle Temp</string>
     <string name="tiep_tuc">Tiếp tục</string>
     <string name="chao_mung_tro_lai">Chào mừng trở lại</string>
     <string name="dang_nhap_vao_tk">đăng nhập vào tài khoản của bạn</string>
@@ -17,6 +17,7 @@
     <string name="dang_ky">ĐĂNG KÝ</string>
     <string name="da_co_tk">Đã có tài khoản?</string>
     <string name="or_dang_ky_voi">hoặc đăng ký với</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Nhà</string>
     <string name="food_list">Chọn món</string>
@@ -53,4 +54,16 @@
     <string name="hint_take_note">Nhập ghi chú tại đây...</string>
     <string name="danh_sach_sp">Danh sách sản phẩm</string>
     <string name="ghi_chu_dh">Ghi chú đơn hàng</string>
+    <string name="name_acc_test">Alexander Hipp</string>
+    <string name="txt_ranking">Khách hàng tiềm năng</string>
+    <string name="lich_su_don_hang">Lịch sử đơn hàng</string>
+    <string name="my_voucher">Voucher của tôi</string>
+    <string name="list_favorite">Sản phẩm yêu thích</string>
+    <string name="my_notification">Thông báo của tôi</string>
+    <string name="contact">Liên hệ và góp ý</string>
+    <string name="my_info">Thông tin cá nhân</string>
+    <string name="saved_location">Địa chỉ đã lưu</string>
+    <string name="txt_settings">Cài đặt</string>
+    <string name="uu_dai_van_chuyen">Ưu đãi phí vận chuyển</string>
+    <string name="uu_dai_giam_gia">Ưu đãi giảm giá</string>
 </resources>
