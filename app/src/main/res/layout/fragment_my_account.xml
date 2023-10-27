@@ -244,7 +244,7 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:includeFontPadding="false"
                     android:fontFamily="@font/inter_regular"
-                    android:text="@string/my_info"
+                    android:text="Thông tin nhóm"
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorTextPrimary"/>
 
