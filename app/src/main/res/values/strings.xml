@@ -66,4 +66,7 @@
     <string name="uu_dai_van_chuyen">Ưu đãi phí vận chuyển</string>
     <string name="uu_dai_giam_gia">Ưu đãi giảm giá</string>
     <string name="sai_password">Sai mật khẩu!</string>
+    <string name="so_dt_da_sdung">Số đã được sử dụng!</string>
+    <string name="do_dai_khong_hople">Độ dài không hợp lệ!</string>
+
 </resources>

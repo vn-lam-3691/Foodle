@@ -19,6 +19,15 @@ public class User implements Serializable {
         this.isDefault = isDefault;
     }
 
+    public User(int avatarPath, String name, String phoneNumber, String address, String password, boolean isDefault) {
+        this.avatarPath = avatarPath;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.password = password;
+        this.isDefault = isDefault;
+    }
+
     public void setAvatarPath(int avatarPath) {
         this.avatarPath = avatarPath;
     }
