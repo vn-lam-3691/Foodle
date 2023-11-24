@@ -31,11 +31,11 @@ public class UserInformationActivity extends AppCompatActivity {
         imageBack = findViewById(R.id.image_back);
 
         listInfoUser = new ArrayList<>();
-        listInfoUser.add(new User(1, 0, "Trương Văn Lâm", "0384586xxx", "Hoàng Diệu, Bình Hiên, Hải Châu, Đà Nẵng", true));
-        listInfoUser.add(new User(2, 0, "Trần Công Quang Phú", "0384586xxx", "Pham Nhu Tang, Thanh Khe, Da Nang", false));
-        listInfoUser.add(new User(3, 0, "Phan Le Van Minh", "0384586xxx", "Tran Cao Van, Thanh Khe, Da Nang", false));
-        listInfoUser.add(new User(4, 0, "Le Phuoc Duc", "0384586xxx", "Đinh Tiên Hoàng, Hải Châu, Đà Nẵng", false));
-        listInfoUser.add(new User(5, 0, "Phạm Thanh Trúc", "0384586xxx", "Dien Bien Phu, Thanh Khe, Da Nang", false));
+        listInfoUser.add(new User(0, "Trương Văn Lâm", "0384586xxx", "Hoàng Diệu, Bình Hiên, Hải Châu, Đà Nẵng", true));
+        listInfoUser.add(new User(0, "Trần Công Quang Phú", "0384586xxx", "Pham Nhu Tang, Thanh Khe, Da Nang", false));
+        listInfoUser.add(new User(0, "Phan Le Van Minh", "0384586xxx", "Tran Cao Van, Thanh Khe, Da Nang", false));
+        listInfoUser.add(new User(0, "Le Phuoc Duc", "0384586xxx", "Đinh Tiên Hoàng, Hải Châu, Đà Nẵng", false));
+        listInfoUser.add(new User(0, "Phạm Thanh Trúc", "0384586xxx", "Dien Bien Phu, Thanh Khe, Da Nang", false));
 
         rcvInformationList = (RecyclerView) findViewById(R.id.recyclerView_info_list);
         adapter = new UserInfoAdapter(listInfoUser);
