@@ -1,27 +1,16 @@
 package com.vanlam.foodle.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.Color;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
-import android.widget.Toast;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.vanlam.foodle.models.User;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.vanlam.foodle.R;
+import com.vanlam.foodle.adapters.Preferences;
+import com.vanlam.foodle.models.User;
 
 public class SignInActivity extends AppCompatActivity {
     private MaterialButton btnSignIn;
@@ -37,6 +29,7 @@ public class SignInActivity extends AppCompatActivity {
     private EditText etPhoneNumber, etPassword;
     private FirebaseDatabase database;
     private DatabaseReference tbUser;
+    private CheckBox cbRemember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +40,7 @@ public class SignInActivity extends AppCompatActivity {
         txtSignUp = findViewById(R.id.txt_signUpNow);
         etPhoneNumber = findViewById(R.id.input_phoneNumber);
         etPassword = findViewById(R.id.input_password);
+        cbRemember = findViewById(R.id.cb_rememberMe);
 
         database = FirebaseDatabase.getInstance();
         tbUser = database.getReference("Users");
@@ -103,6 +97,18 @@ public class SignInActivity extends AppCompatActivity {
                     User user = snapshot.child(etPhoneNumber.getText().toString()).getValue(User.class);
                     if (user != null) {
                         if (user.getPassword().equals(etPassword.getText().toString())) {
+                            if (cbRemember.isChecked()) {
+                                // Lưu lại trạng thái tùy chọn là Remember me
+                                Preferences.setDataLogin(SignInActivity.this, true);
+                            }
+                            else {
+                                // Không lưu lại trạng thái tùy chọn là Remember me
+                                Preferences.setDataLogin(SignInActivity.this, false);
+                            }
+
+                            // Lưu lại thông tin tài khoản của User dưới dạng Json
+                            Preferences.setDataUser(parseUserJson(user), SignInActivity.this);
+
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -133,6 +139,11 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(SignInActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String parseUserJson(User user) {
+        Gson gson = new Gson();
+        return gson.toJson(user);
     }
 
 }
