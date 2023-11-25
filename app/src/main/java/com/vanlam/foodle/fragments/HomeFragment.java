@@ -39,13 +39,12 @@ import java.util.List;
 public class HomeFragment extends Fragment implements View.OnClickListener {
     public static final int REQUEST_CODE_VIEW_FOOD = 1;
     private RecyclerView recyclerViewFoodList, recyclerViewFoodSuggest, recyclerViewVoucher;
-    private FoodSuggestAdapter foodSuggestAdapter;
     private VoucherAdapter voucherAdapter;
-    private List<Food> listFood, listSuggestList;
     private List<Voucher> listVoucher;
     private DatabaseReference tbFood;
     private FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> foodItemAdapter;
-    private FirebaseRecyclerOptions<Food> options;
+    private FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder> foodSuggestAdapter;
+    private FirebaseRecyclerOptions<Food> options, optionsSuggest;
     private View rootView;
     private LinearLayout itmCate1, itmCate2, itmCate3, itmCate4, itmCate5;
     public static int idCategory = 1;
@@ -70,18 +69,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mapping(view);
         tbFood = FirebaseDatabase.getInstance().getReference();
 
+        // Load danh sách vài sản phẩm lên phần Danh mục trong trang Home
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerViewFoodList.setLayoutManager(staggeredGridLayoutManager);
         new LoadListFood().execute();
 
-
-        listSuggestList = new ArrayList<>();
-
-        recyclerViewFoodSuggest = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_list_suggest);
-        foodSuggestAdapter = new FoodSuggestAdapter(listSuggestList);
+        // Load vài sản phẩm lên phần Đề xuất
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewFoodSuggest.setLayoutManager(linearLayoutManager1);
-        recyclerViewFoodSuggest.setAdapter(foodSuggestAdapter);
+        new LoadListFoodSuggest().execute();
 
         listVoucher = new ArrayList<>();
         listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
@@ -101,12 +97,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         foodItemAdapter.startListening();
+        foodSuggestAdapter.startListening();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         foodItemAdapter.stopListening();
+        foodSuggestAdapter.startListening();
     }
 
     private void mapping(View view) {
@@ -123,6 +121,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         recyclerViewFoodList = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_foodList);
         progressLoad = rootView.findViewById(R.id.progress_food_load);
+
+        recyclerViewFoodSuggest = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_list_suggest);
     }
 
     @Override
@@ -211,6 +211,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             super.onPostExecute(newAdapter);
             recyclerViewFoodList.setAdapter(newAdapter);
             progressLoad.setVisibility(View.GONE);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    class LoadListFoodSuggest extends AsyncTask<Void, Void, FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder>> {
+        double indexStart;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            indexStart = (double) (Math.random() * 42 + 1);
+        }
+
+        @Override
+        protected FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder> doInBackground(Void... voids) {
+            optionsSuggest = new FirebaseRecyclerOptions.Builder<Food>()
+                    .setQuery(tbFood.child("Product").orderByChild("price").startAt(indexStart).limitToLast(7), Food.class)
+                    .build();
+            foodSuggestAdapter = new FoodSuggestAdapter(optionsSuggest);
+            return foodSuggestAdapter;
+        }
+
+        @Override
+        protected void onPostExecute(FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder> foodSuggestAdapter) {
+            super.onPostExecute(foodSuggestAdapter);
+            recyclerViewFoodSuggest.setAdapter(foodSuggestAdapter);
         }
     }
 }

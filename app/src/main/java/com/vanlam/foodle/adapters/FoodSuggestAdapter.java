@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.models.Food;
@@ -16,11 +19,10 @@ import com.vanlam.foodle.models.Food;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class FoodSuggestAdapter extends RecyclerView.Adapter<FoodSuggestAdapter.FoodSuggestViewHolder> {
-    private List<Food> foodSuggestList;
+public class FoodSuggestAdapter extends FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder> {
 
-    public FoodSuggestAdapter(List<Food> foodSuggestList) {
-        this.foodSuggestList = foodSuggestList;
+    public FoodSuggestAdapter(@NonNull FirebaseRecyclerOptions<Food> options) {
+        super(options);
     }
 
     @NonNull
@@ -31,20 +33,15 @@ public class FoodSuggestAdapter extends RecyclerView.Adapter<FoodSuggestAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodSuggestViewHolder holder, int position) {
-        Food item = foodSuggestList.get(position);
-
-        holder.getFoodName().setText(item.getName());
+    protected void onBindViewHolder(@NonNull FoodSuggestViewHolder holder, int position, @NonNull Food model) {
+        holder.getFoodName().setText(model.getName());
         DecimalFormat df = new DecimalFormat("#,###.##");
-        holder.getFoodPrice().setText(df.format(item.getPrice()) + "đ");
+        holder.getFoodPrice().setText(df.format(model.getPrice()) + "đ");
+
+        Glide.with(holder.itemView).load(model.getImageUrl()).into(holder.getFoodImage());
     }
 
-    @Override
-    public int getItemCount() {
-        return foodSuggestList.size();
-    }
-
-    static class FoodSuggestViewHolder extends RecyclerView.ViewHolder {
+    public static class FoodSuggestViewHolder extends RecyclerView.ViewHolder {
         private ImageView foodImage;
         private TextView foodName, foodPrice;
         private MaterialButton btnChoose;
