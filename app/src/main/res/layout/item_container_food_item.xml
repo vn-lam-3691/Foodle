@@ -13,11 +13,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/image_food"
             android:layout_width="@dimen/_128sdp"
             android:layout_height="@dimen/_128sdp"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="@dimen/_5sdp"/>
 
         <TextView
             android:id="@+id/name_food"

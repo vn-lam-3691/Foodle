@@ -1,7 +1,10 @@
 package com.vanlam.foodle.adapters;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +15,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.listeners.FoodItemListener;
 import com.vanlam.foodle.models.Food;
@@ -20,13 +32,10 @@ import com.vanlam.foodle.models.Food;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.FoodItemViewHolder> {
-    private List<Food> foodList;
-    private FoodItemListener foodItemListener;
+public class FoodItemAdapter extends FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> {
 
-    public FoodItemAdapter(List<Food> foodList, FoodItemListener listener) {
-        this.foodList = foodList;
-        this.foodItemListener = listener;
+    public FoodItemAdapter(@NonNull FirebaseRecyclerOptions<Food> options) {
+        super(options);
     }
 
     @NonNull
@@ -37,27 +46,15 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.FoodIt
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Food item = foodList.get(position);
-        holder.getFoodImage().setImageResource(item.getImagePath());
-        holder.getFoodName().setText(item.getName());
+    protected void onBindViewHolder(@NonNull FoodItemViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull Food model) {
+        holder.getFoodName().setText(model.getName());
         DecimalFormat df = new DecimalFormat("#,###.##");
-        holder.getFoodPrice().setText(df.format(item.getPrice()) + "đ");
+        holder.getFoodPrice().setText(df.format(model.getPrice()) + "đ");
 
-        holder.getLayoutFoodItem().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                foodItemListener.onClick(view, item, position);
-            }
-        });
+        Glide.with(holder.itemView).load(model.getImageUrl()).into(holder.getFoodImage());
     }
 
-    @Override
-    public int getItemCount() {
-        return foodList.size();
-    }
-
-    static class FoodItemViewHolder extends RecyclerView.ViewHolder {
+    public static class FoodItemViewHolder extends RecyclerView.ViewHolder {
         private ImageView foodImage, foodFavorite;
         private TextView foodName, foodPrice;
         private MaterialButton btnChoose;

@@ -55,28 +55,8 @@ public class FoodListAllFragment extends Fragment implements FoodItemListener {
         fragmentManager = getActivity().getSupportFragmentManager();
 
         foodListAll = new ArrayList<>();
-        foodListAll.add(new Food(R.drawable.ca_phe_suada, "Cà phê sữa đá", 39000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.tra_den_macchato, "Trà đen Macchiato", 45000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.tra_sua_macca, "Trà sữa Macca", 55000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.tra_sen_nong, "Trà sen nóng", 49000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.banhmi, "Bánh mì thịt nguội", 30000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.bac_xiu, "Bạc xỉu", 35000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.capuchino_nong, "Capuchino nóng", 39000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.tra_dao_kobumcha, "Trà đào Kobumcha", 55000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListAll.add(new Food(R.drawable.mocchi_kem_scl, "Mocchi kem socola", 35000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
 
-        foodItemAdapter = new FoodItemAdapter(foodListAll, this);
+//        foodItemAdapter = new FoodItemAdapter(foodListAll, this);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rcvFoodListAll.setLayoutManager(staggeredGridLayoutManager);
         rcvFoodListAll.setAdapter(foodItemAdapter);
@@ -88,6 +68,5 @@ public class FoodListAllFragment extends Fragment implements FoodItemListener {
         Intent intent = new Intent(getContext(), FoodDetailActivity.class);
         intent.putExtra("food", foodItem);
         startActivityForResult(intent, REQUEST_CODE_VIEW_FOOD);
-        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }

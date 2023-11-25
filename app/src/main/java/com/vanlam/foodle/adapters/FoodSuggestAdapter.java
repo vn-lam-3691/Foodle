@@ -33,7 +33,7 @@ public class FoodSuggestAdapter extends RecyclerView.Adapter<FoodSuggestAdapter.
     @Override
     public void onBindViewHolder(@NonNull FoodSuggestViewHolder holder, int position) {
         Food item = foodSuggestList.get(position);
-        holder.getFoodImage().setImageResource(item.getImagePath());
+
         holder.getFoodName().setText(item.getName());
         DecimalFormat df = new DecimalFormat("#,###.##");
         holder.getFoodPrice().setText(df.format(item.getPrice()) + "đ");

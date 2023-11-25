@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,16 +54,8 @@ public class FoodListCoffeeMachineFragment extends Fragment implements FoodItemL
         fragmentManager = getActivity().getSupportFragmentManager();
 
         foodListCfMachine = new ArrayList<>();
-        foodListCfMachine.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListCfMachine.add(new Food(R.drawable.bac_xiu, "Bạc xỉu", 35000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListCfMachine.add(new Food(R.drawable.capuchino_nong, "Capuchino nóng", 45000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        foodListCfMachine.add(new Food(R.drawable.ca_phe_suada, "Cà phê sữa đá", 35000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
 
-        foodItemAdapter = new FoodItemAdapter(foodListCfMachine, this);
+//        foodItemAdapter = new FoodItemAdapter(foodListCfMachine, this);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rcvFoodListCFM.setLayoutManager(staggeredGridLayoutManager);
         rcvFoodListCFM.setAdapter(foodItemAdapter);
@@ -74,6 +67,5 @@ public class FoodListCoffeeMachineFragment extends Fragment implements FoodItemL
         Intent intent = new Intent(getContext(), FoodDetailActivity.class);
         intent.putExtra("food", foodItem);
         startActivityForResult(intent, REQUEST_CODE_VIEW_FOOD);
-        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }

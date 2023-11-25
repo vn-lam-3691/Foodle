@@ -1,41 +1,56 @@
 package com.vanlam.foodle.fragments;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.vanlam.foodle.R;
-import com.vanlam.foodle.activities.FoodDetailActivity;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
 import com.vanlam.foodle.adapters.FoodSuggestAdapter;
 import com.vanlam.foodle.adapters.VoucherAdapter;
-import com.vanlam.foodle.listeners.FoodItemListener;
 import com.vanlam.foodle.models.Food;
 import com.vanlam.foodle.models.Voucher;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements FoodItemListener {
+public class HomeFragment extends Fragment implements View.OnClickListener {
     public static final int REQUEST_CODE_VIEW_FOOD = 1;
     private RecyclerView recyclerViewFoodList, recyclerViewFoodSuggest, recyclerViewVoucher;
-    private FoodItemAdapter foodItemAdapter;
     private FoodSuggestAdapter foodSuggestAdapter;
     private VoucherAdapter voucherAdapter;
     private List<Food> listFood, listSuggestList;
     private List<Voucher> listVoucher;
-    private int foodItemPosition = -1;
+    private DatabaseReference tbFood;
+    private FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> foodItemAdapter;
+    private FirebaseRecyclerOptions<Food> options;
+    private View rootView;
+    private LinearLayout itmCate1, itmCate2, itmCate3, itmCate4, itmCate5;
+    public static int idCategory = 1;
+    private ProgressBar progressLoad;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,35 +59,23 @@ public class HomeFragment extends Fragment implements FoodItemListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listFood = new ArrayList<>();
-        listFood.add(new Food(R.drawable.ca_phe_suada, "Cà phê sữa đá", 39000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.tra_den_macchato, "Trà đen Macchiato", 45000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.capuchino_nong, "Capuchino nóng", 39000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.tra_dao_kobumcha, "Trà đào Kobumcha", 55000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.tra_sen_nong, "Trà sen nóng", 49000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
-        listFood.add(new Food(R.drawable.img_food_item, "Caramel Macchiato đá", 55000,
-                "Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê."));
+        mapping(view);
+        tbFood = FirebaseDatabase.getInstance().getReference();
 
-        listSuggestList = new ArrayList<>();
-        listSuggestList.addAll(listFood);
-
-        recyclerViewFoodList = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_foodList);
-        foodItemAdapter = new FoodItemAdapter(listFood, this);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerViewFoodList.setLayoutManager(staggeredGridLayoutManager);
-        recyclerViewFoodList.setAdapter(foodItemAdapter);
+        new LoadListFood().execute();
+
+
+        listSuggestList = new ArrayList<>();
 
         recyclerViewFoodSuggest = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_list_suggest);
         foodSuggestAdapter = new FoodSuggestAdapter(listSuggestList);
@@ -82,9 +85,9 @@ public class HomeFragment extends Fragment implements FoodItemListener {
 
         listVoucher = new ArrayList<>();
         listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-        listVoucher.add(new Voucher(R.drawable.img_voucher_2, "Freeship đồng giá 39K", "Mua 1 tặng 1 dành cho bạn mới"));
         listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-        listVoucher.add(new Voucher(R.drawable.img_voucher_2, "Freeship đồng giá 39K", "Mua 1 tặng 1 dành cho bạn mới"));
+        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
+        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
         listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
 
         recyclerViewVoucher = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_vouchers);
@@ -95,11 +98,119 @@ public class HomeFragment extends Fragment implements FoodItemListener {
     }
 
     @Override
-    public void onClick(View view, Food foodItem, int position) {
-        foodItemPosition = position;
-        Intent intent = new Intent(getContext(), FoodDetailActivity.class);
-        intent.putExtra("food", foodItem);
-        startActivityForResult(intent, REQUEST_CODE_VIEW_FOOD);
-        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    public void onStart() {
+        super.onStart();
+        foodItemAdapter.startListening();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        foodItemAdapter.stopListening();
+    }
+
+    private void mapping(View view) {
+        itmCate1 = view.findViewById(R.id.item_category_1);
+        itmCate1.setOnClickListener(this);
+        itmCate2 = view.findViewById(R.id.item_category_2);
+        itmCate2.setOnClickListener(this);
+        itmCate3 = view.findViewById(R.id.item_category_3);
+        itmCate3.setOnClickListener(this);
+        itmCate4 = view.findViewById(R.id.item_category_4);
+        itmCate4.setOnClickListener(this);
+        itmCate5 = view.findViewById(R.id.item_category_5);
+        itmCate5.setOnClickListener(this);
+
+        recyclerViewFoodList = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_foodList);
+        progressLoad = rootView.findViewById(R.id.progress_food_load);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int oldPos = idCategory;
+        if (view == itmCate1) {
+            idCategory = 1;
+            setViewItemCategory(itmCate1, oldPos);
+        }
+        else if (view == itmCate2) {
+            idCategory = 2;
+            setViewItemCategory(itmCate2, oldPos);
+        }
+        else if (view == itmCate3) {
+            idCategory = 3;
+            setViewItemCategory(itmCate3, oldPos);
+        }
+        else if (view == itmCate4) {
+            idCategory = 4;
+            setViewItemCategory(itmCate4, oldPos);
+        }
+        else if (view == itmCate5) {
+            idCategory = 5;
+            setViewItemCategory(itmCate5, oldPos);
+        }
+        Query query = tbFood.child("Product").orderByChild("idCategory").equalTo("0" + String.valueOf(idCategory)).limitToLast(6);
+        new LoadListFoodBaseCate().execute(query);
+    }
+
+    private void setViewItemCategory(View itemView, int oldPos) {
+        TextView tvCategory;
+        itemView.setBackgroundResource(R.drawable.background_item_cate_active);
+        tvCategory = itemView.findViewWithTag("tv_category");
+        tvCategory.setTextColor(Color.WHITE);
+
+        LinearLayout layoutCate = rootView.findViewById(R.id.layout_category);
+        View layoutItemCate = layoutCate.getChildAt(oldPos - 1);
+        layoutItemCate.setBackgroundResource(R.drawable.baclground_item_cate_inactive);
+        tvCategory = layoutItemCate.findViewWithTag("tv_category");
+        tvCategory.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorTextSecond));
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    class LoadListFood extends AsyncTask<Void, Void, FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder>> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressLoad.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> doInBackground(Void... voids) {
+            options = new FirebaseRecyclerOptions.Builder<Food>()
+                    .setQuery(tbFood.child("Product").orderByChild("idCategory").equalTo("0" + String.valueOf(idCategory)).limitToLast(6), Food.class)
+                    .build();
+            foodItemAdapter = new FoodItemAdapter(options);
+            return foodItemAdapter;
+        }
+
+        @Override
+        protected void onPostExecute(FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> foodItemAdapter) {
+            super.onPostExecute(foodItemAdapter);
+            recyclerViewFoodList.setAdapter(foodItemAdapter);
+            progressLoad.setVisibility(View.GONE);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    class LoadListFoodBaseCate extends AsyncTask<Query, Void, FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder>> {
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressLoad.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> doInBackground(Query... query) {
+            options = new FirebaseRecyclerOptions.Builder<Food>()
+                    .setQuery(query[0], Food.class)
+                    .build();
+            foodItemAdapter.updateOptions(options);
+            return foodItemAdapter;
+        }
+
+        @Override
+        protected void onPostExecute(FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> newAdapter) {
+            super.onPostExecute(newAdapter);
+            recyclerViewFoodList.setAdapter(newAdapter);
+            progressLoad.setVisibility(View.GONE);
+        }
     }
 }

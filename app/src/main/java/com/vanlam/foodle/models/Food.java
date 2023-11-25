@@ -3,27 +3,37 @@ package com.vanlam.foodle.models;
 import java.io.Serializable;
 
 public class Food implements Serializable {
-    private int imagePath;
+    private String imageUrl;
     private String name;
+    private String idCategory;
     private double price;
     private String description;
 
     public Food() {
     }
 
-    public Food(int imagePath, String name, double price, String description) {
-        this.imagePath = imagePath;
+    public Food(String imageUrl, String name, String idCategory, double price, String description) {
+        this.imageUrl = imageUrl;
         this.name = name;
+        this.idCategory = idCategory;
         this.price = price;
         this.description = description;
     }
 
-    public int getImagePath() {
-        return imagePath;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImagePath(int imagePath) {
-        this.imagePath = imagePath;
+    public void setImageUrl(String imagePath) {
+        this.imageUrl = imagePath;
+    }
+
+    public String getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(String idCategory) {
+        this.idCategory = idCategory;
     }
 
     public String getName() {
@@ -38,8 +48,8 @@ public class Food implements Serializable {
         return price;
     }
 
-    public double setPrice(double price) {
-        return this.price = price;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getDescription() {
