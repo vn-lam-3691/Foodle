@@ -1,5 +1,7 @@
 package com.vanlam.foodle.adapters;
 
+import static com.vanlam.foodle.fragments.HomeFragment.progressLoad;
+
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -100,6 +102,14 @@ public class FoodItemAdapter extends FirebaseRecyclerAdapter<Food, FoodItemAdapt
 
         public void setLayoutFoodItem(LinearLayout layoutFoodItem) {
             this.layoutFoodItem = layoutFoodItem;
+        }
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        if (progressLoad != null) {
+            progressLoad.setVisibility(View.GONE);
         }
     }
 }

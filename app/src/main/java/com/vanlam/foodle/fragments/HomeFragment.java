@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private View rootView;
     private LinearLayout itmCate1, itmCate2, itmCate3, itmCate4, itmCate5;
     public static int idCategory = 1;
-    private ProgressBar progressLoad;
+    public static ProgressBar progressLoad;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,30 +59,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        mapping(rootView);
+        tbFood = FirebaseDatabase.getInstance().getReference();
+
+        // Load danh sách vài sản phẩm lên phần Danh mục trong trang Home
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerViewFoodList.setLayoutManager(staggeredGridLayoutManager);
+        LoadListFood();
+
+        // Load vài sản phẩm lên phần Đề xuất
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewFoodSuggest.setLayoutManager(linearLayoutManager1);
+        LoadListFoodSuggest();
+
+        // Load danh sách voucher
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewVoucher.setLayoutManager(linearLayoutManager2);
+        LoadListVoucher();
+
         return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mapping(view);
-        tbFood = FirebaseDatabase.getInstance().getReference();
-
-        // Load danh sách vài sản phẩm lên phần Danh mục trong trang Home
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        recyclerViewFoodList.setLayoutManager(staggeredGridLayoutManager);
-        new LoadListFood().execute();
-
-        // Load vài sản phẩm lên phần Đề xuất
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewFoodSuggest.setLayoutManager(linearLayoutManager1);
-//        new LoadListFoodSuggest().execute();
-
-        // Load danh sách voucher
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewVoucher.setLayoutManager(linearLayoutManager2);
-//        new LoadListVoucher().execute();
     }
 
     @Override
@@ -145,7 +146,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             setViewItemCategory(itmCate5, oldPos);
         }
         Query query = tbFood.child("Product").orderByChild("idCategory").equalTo("0" + String.valueOf(idCategory)).limitToLast(6);
-        new LoadListFoodBaseCate().execute(query);
+        LoadListFoodBaseCate(query);
     }
 
     private void setViewItemCategory(View itemView, int oldPos) {
@@ -161,96 +162,38 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         tvCategory.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.colorTextSecond));
     }
 
-    @SuppressLint("StaticFieldLeak")
-    class LoadListFood extends AsyncTask<Void, Void, FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder>> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressLoad.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> doInBackground(Void... voids) {
-            options = new FirebaseRecyclerOptions.Builder<Food>()
-                    .setQuery(tbFood.child("Product").orderByChild("idCategory").equalTo("0" + String.valueOf(idCategory)).limitToLast(6), Food.class)
-                    .build();
-            foodItemAdapter = new FoodItemAdapter(options);
-            return foodItemAdapter;
-        }
-
-        @Override
-        protected void onPostExecute(FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> foodItemAdapter) {
-            super.onPostExecute(foodItemAdapter);
-            recyclerViewFoodList.setAdapter(foodItemAdapter);
-            progressLoad.setVisibility(View.GONE);
-        }
+    private void LoadListFood() {
+        options = new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(tbFood.child("Product").orderByChild("idCategory").equalTo("0" + String.valueOf(idCategory)).limitToLast(6), Food.class)
+                .build();
+        foodItemAdapter = new FoodItemAdapter(options);
+        recyclerViewFoodList.setAdapter(foodItemAdapter);
     }
 
-    @SuppressLint("StaticFieldLeak")
-    class LoadListFoodBaseCate extends AsyncTask<Query, Void, FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder>> {
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressLoad.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> doInBackground(Query... query) {
-            options = new FirebaseRecyclerOptions.Builder<Food>()
-                    .setQuery(query[0], Food.class)
-                    .build();
-            foodItemAdapter.updateOptions(options);
-            return foodItemAdapter;
-        }
-
-        @Override
-        protected void onPostExecute(FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> newAdapter) {
-            super.onPostExecute(newAdapter);
-            recyclerViewFoodList.setAdapter(newAdapter);
-            progressLoad.setVisibility(View.GONE);
-        }
+    private void LoadListFoodBaseCate(Query query) {
+        options = new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(query, Food.class)
+                .build();
+        foodItemAdapter.updateOptions(options);
+        recyclerViewFoodList.setAdapter(foodItemAdapter);
     }
 
-    @SuppressLint("StaticFieldLeak")
-    class LoadListFoodSuggest extends AsyncTask<Void, Void, FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder>> {
+    private void LoadListFoodSuggest() {
         double indexStart;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            indexStart = (double) (Math.random() * 42 + 1);
-        }
+        indexStart = (double) (Math.random() * 42 + 1);
 
-        @Override
-        protected FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder> doInBackground(Void... voids) {
-            optionsSuggest = new FirebaseRecyclerOptions.Builder<Food>()
-                    .setQuery(tbFood.child("Product").orderByChild("price").startAt(indexStart).limitToLast(7), Food.class)
-                    .build();
-            foodSuggestAdapter = new FoodSuggestAdapter(optionsSuggest);
-            return foodSuggestAdapter;
-        }
-
-        @Override
-        protected void onPostExecute(FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder> foodSuggestAdapter) {
-            super.onPostExecute(foodSuggestAdapter);
-            recyclerViewFoodSuggest.setAdapter(foodSuggestAdapter);
-        }
+        optionsSuggest = new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(tbFood.child("Product").orderByChild("price").startAt(indexStart).limitToLast(7), Food.class)
+                .build();
+        foodSuggestAdapter = new FoodSuggestAdapter(optionsSuggest);
+        recyclerViewFoodSuggest.setAdapter(foodSuggestAdapter);
     }
 
-    @SuppressLint("StaticFieldLeak")
-    class LoadListVoucher extends AsyncTask<Void, Void, FirebaseRecyclerAdapter<Voucher, VoucherAdapter.VoucherViewHolder>> {
-
-        @Override
-        protected FirebaseRecyclerAdapter<Voucher, VoucherAdapter.VoucherViewHolder> doInBackground(Void... voids) {
-            optionsVoucher = new FirebaseRecyclerOptions.Builder<Voucher>()
-                    .setQuery(tbFood.child("Vouchers"), Voucher.class)
-                    .build();
-            voucherAdapter = new VoucherAdapter(optionsVoucher);
-            return voucherAdapter;
-        }
-
-        @Override
-        protected void onPostExecute(FirebaseRecyclerAdapter<Voucher, VoucherAdapter.VoucherViewHolder> voucherAdapter) {
-            super.onPostExecute(voucherAdapter);
-            recyclerViewVoucher.setAdapter(voucherAdapter);
-        }
+    private void LoadListVoucher() {
+        optionsVoucher = new FirebaseRecyclerOptions.Builder<Voucher>()
+                .setQuery(tbFood.child("Vouchers"), Voucher.class)
+                .build();
+        voucherAdapter = new VoucherAdapter(optionsVoucher);
+        recyclerViewVoucher.setAdapter(voucherAdapter);
     }
 }
