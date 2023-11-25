@@ -39,12 +39,12 @@ import java.util.List;
 public class HomeFragment extends Fragment implements View.OnClickListener {
     public static final int REQUEST_CODE_VIEW_FOOD = 1;
     private RecyclerView recyclerViewFoodList, recyclerViewFoodSuggest, recyclerViewVoucher;
-    private VoucherAdapter voucherAdapter;
-    private List<Voucher> listVoucher;
     private DatabaseReference tbFood;
     private FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> foodItemAdapter;
     private FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder> foodSuggestAdapter;
     private FirebaseRecyclerOptions<Food> options, optionsSuggest;
+    private FirebaseRecyclerAdapter<Voucher, VoucherAdapter.VoucherViewHolder> voucherAdapter;
+    private FirebaseRecyclerOptions<Voucher> optionsVoucher;
     private View rootView;
     private LinearLayout itmCate1, itmCate2, itmCate3, itmCate4, itmCate5;
     public static int idCategory = 1;
@@ -77,20 +77,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // Load vài sản phẩm lên phần Đề xuất
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewFoodSuggest.setLayoutManager(linearLayoutManager1);
-        new LoadListFoodSuggest().execute();
+//        new LoadListFoodSuggest().execute();
 
-        listVoucher = new ArrayList<>();
-        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-        listVoucher.add(new Voucher(R.drawable.img_voucher, "Mua 1 tặng 1 dành cho bạn mới", "Mua 1 tặng 1 dành cho bạn mới"));
-
-        recyclerViewVoucher = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_vouchers);
-        voucherAdapter = new VoucherAdapter(listVoucher);
+        // Load danh sách voucher
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewVoucher.setLayoutManager(linearLayoutManager2);
-        recyclerViewVoucher.setAdapter(voucherAdapter);
+//        new LoadListVoucher().execute();
     }
 
     @Override
@@ -98,13 +90,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onStart();
         foodItemAdapter.startListening();
         foodSuggestAdapter.startListening();
+        voucherAdapter.startListening();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         foodItemAdapter.stopListening();
-        foodSuggestAdapter.startListening();
+        foodSuggestAdapter.stopListening();
+        voucherAdapter.stopListening();
     }
 
     private void mapping(View view) {
@@ -123,6 +117,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         progressLoad = rootView.findViewById(R.id.progress_food_load);
 
         recyclerViewFoodSuggest = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_list_suggest);
+
+        recyclerViewVoucher = (RecyclerView) view.findViewById(R.id.recyclerView_hsc_vouchers);
     }
 
     @Override
@@ -236,6 +232,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         protected void onPostExecute(FirebaseRecyclerAdapter<Food, FoodSuggestAdapter.FoodSuggestViewHolder> foodSuggestAdapter) {
             super.onPostExecute(foodSuggestAdapter);
             recyclerViewFoodSuggest.setAdapter(foodSuggestAdapter);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    class LoadListVoucher extends AsyncTask<Void, Void, FirebaseRecyclerAdapter<Voucher, VoucherAdapter.VoucherViewHolder>> {
+
+        @Override
+        protected FirebaseRecyclerAdapter<Voucher, VoucherAdapter.VoucherViewHolder> doInBackground(Void... voids) {
+            optionsVoucher = new FirebaseRecyclerOptions.Builder<Voucher>()
+                    .setQuery(tbFood.child("Vouchers"), Voucher.class)
+                    .build();
+            voucherAdapter = new VoucherAdapter(optionsVoucher);
+            return voucherAdapter;
+        }
+
+        @Override
+        protected void onPostExecute(FirebaseRecyclerAdapter<Voucher, VoucherAdapter.VoucherViewHolder> voucherAdapter) {
+            super.onPostExecute(voucherAdapter);
+            recyclerViewVoucher.setAdapter(voucherAdapter);
         }
     }
 }

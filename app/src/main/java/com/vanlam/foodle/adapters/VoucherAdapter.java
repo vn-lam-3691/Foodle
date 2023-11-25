@@ -9,16 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.models.Voucher;
 
 import java.util.List;
 
-public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherViewHolder> {
-    private List<Voucher> voucherList;
+public class VoucherAdapter extends FirebaseRecyclerAdapter<Voucher, VoucherAdapter.VoucherViewHolder> {
 
-    public VoucherAdapter(List<Voucher> voucherList) {
-        this.voucherList = voucherList;
+    public VoucherAdapter(@NonNull FirebaseRecyclerOptions<Voucher> options) {
+        super(options);
     }
 
     @NonNull
@@ -29,18 +31,13 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VoucherViewHolder holder, int position) {
-        Voucher item = voucherList.get(position);
-        holder.getImageVoucher().setImageResource(item.getImagePath());
-        holder.getTitleVoucher().setText(item.getTitle());
+    protected void onBindViewHolder(@NonNull VoucherViewHolder holder, int position, @NonNull Voucher model) {
+        holder.getTitleVoucher().setText(model.getName());
+
+        Glide.with(holder.itemView).load(model.getImageUrl()).into(holder.getImageVoucher());
     }
 
-    @Override
-    public int getItemCount() {
-        return voucherList.size();
-    }
-
-    static class VoucherViewHolder extends RecyclerView.ViewHolder {
+    public static class VoucherViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageVoucher;
         private TextView titleVoucher;
 

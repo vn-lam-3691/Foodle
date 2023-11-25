@@ -36,8 +36,6 @@ public class VoucherVerticalAdapter extends RecyclerView.Adapter<VoucherVertical
     @Override
     public void onBindViewHolder(@NonNull VoucherVertViewHolder holder, int position) {
         Voucher item = listVouchers.get(position);
-        holder.getImgVoucher().setImageResource(item.getImagePath());
-        holder.getTvVoucherName().setText(item.getTitle());
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         holder.getTvVoucherExpiry().setText("HSD:  " + df.format(item.getExpiry()));
 

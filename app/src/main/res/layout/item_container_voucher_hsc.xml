@@ -7,11 +7,12 @@
     android:layout_marginBottom="@dimen/_16sdp"
     android:orientation="vertical">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/image_voucher"
         android:layout_width="@dimen/_105sdp"
         android:layout_height="@dimen/_105sdp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="@dimen/_5sdp"/>
 
     <TextView
         android:id="@+id/title_voucher"
