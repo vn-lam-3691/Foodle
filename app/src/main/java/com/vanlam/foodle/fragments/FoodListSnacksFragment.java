@@ -1,9 +1,6 @@
 package com.vanlam.foodle.fragments;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,27 +10,20 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import com.vanlam.foodle.R;
-import com.vanlam.foodle.activities.FoodDetailActivity;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
-import com.vanlam.foodle.listeners.FoodItemListener;
 import com.vanlam.foodle.models.Food;
 
-import java.util.ArrayList;
-import java.util.List;
-
-// TODO: Fragment nằm trong ViewPager để hiển thị một tập Product theo danh mục
-public class FoodListCoffeeMachineFragment extends Fragment {
-    private RecyclerView rcvFoodListCFM;
+public class FoodListSnacksFragment extends Fragment {
+    private RecyclerView rcvFoodListSnacks;
     private FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> foodItemAdapter;
     private FirebaseRecyclerOptions<Food> options;
     private FragmentManager fragmentManager;
@@ -44,7 +34,7 @@ public class FoodListCoffeeMachineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_food_list_coffee_machine, container, false);
+        rootView = inflater.inflate(R.layout.fragment_food_list_snacks, container, false);
         return rootView;
     }
 
@@ -53,18 +43,18 @@ public class FoodListCoffeeMachineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mContext = getActivity().getApplicationContext();
 
-        rcvFoodListCFM = (RecyclerView) rootView.findViewById(R.id.recyclerView_foodList_CfMachine);
+        rcvFoodListSnacks = (RecyclerView) rootView.findViewById(R.id.recyclerView_foodList_snacks);
         fragmentManager = getActivity().getSupportFragmentManager();
         reference = FirebaseDatabase.getInstance().getReference();
 
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rcvFoodListCFM.setLayoutManager(staggeredGridLayoutManager);
+        rcvFoodListSnacks.setLayoutManager(staggeredGridLayoutManager);
 
         options = new FirebaseRecyclerOptions.Builder<Food>()
-                .setQuery(reference.child("Product").orderByChild("idCategory").equalTo("0" + String.valueOf(2)), Food.class)
+                .setQuery(reference.child("Product").orderByChild("idCategory").equalTo("0" + String.valueOf(5)), Food.class)
                 .build();
         foodItemAdapter = new FoodItemAdapter(options);
-        rcvFoodListCFM.setAdapter(foodItemAdapter);
+        rcvFoodListSnacks.setAdapter(foodItemAdapter);
     }
 
     @Override

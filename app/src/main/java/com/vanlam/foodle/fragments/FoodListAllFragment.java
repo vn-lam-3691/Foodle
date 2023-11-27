@@ -19,6 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.activities.FoodDetailActivity;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
@@ -29,15 +33,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Fragment nằm trong ViewPager để hiển thị tất cả Product
-public class FoodListAllFragment extends Fragment implements FoodItemListener {
-    public static final int REQUEST_CODE_VIEW_FOOD = 1;
-    private List<Food> foodListAll;
+public class FoodListAllFragment extends Fragment {
     private RecyclerView rcvFoodListAll;
-    private FoodItemAdapter foodItemAdapter;
+    private FirebaseRecyclerAdapter<Food, FoodItemAdapter.FoodItemViewHolder> foodItemAdapter;
+    private FirebaseRecyclerOptions<Food> options;
     private FragmentManager fragmentManager;
     private Context mContext;
     private View rootView;
-    private int foodItemPosition = -1;
+    private DatabaseReference reference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,20 +56,27 @@ public class FoodListAllFragment extends Fragment implements FoodItemListener {
 
         rcvFoodListAll = (RecyclerView) rootView.findViewById(R.id.recyclerView_foodList_all);
         fragmentManager = getActivity().getSupportFragmentManager();
+        reference = FirebaseDatabase.getInstance().getReference();
 
-        foodListAll = new ArrayList<>();
-
-//        foodItemAdapter = new FoodItemAdapter(foodListAll, this);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rcvFoodListAll.setLayoutManager(staggeredGridLayoutManager);
+
+        options = new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(reference.child("Product"), Food.class)
+                .build();
+        foodItemAdapter = new FoodItemAdapter(options);
         rcvFoodListAll.setAdapter(foodItemAdapter);
     }
 
     @Override
-    public void onClick(View view, Food foodItem, int position) {
-        foodItemPosition = position;
-        Intent intent = new Intent(getContext(), FoodDetailActivity.class);
-        intent.putExtra("food", foodItem);
-        startActivityForResult(intent, REQUEST_CODE_VIEW_FOOD);
+    public void onStart() {
+        super.onStart();
+        foodItemAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        foodItemAdapter.stopListening();
     }
 }
