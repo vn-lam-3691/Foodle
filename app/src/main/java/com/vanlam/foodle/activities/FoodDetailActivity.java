@@ -21,7 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.vanlam.foodle.R;
+import com.vanlam.foodle.adapters.Preferences;
+import com.vanlam.foodle.database.DatabaseHandler;
+import com.vanlam.foodle.models.Cart;
 import com.vanlam.foodle.models.Food;
+import com.vanlam.foodle.models.User;
 
 import java.text.DecimalFormat;
 
@@ -33,10 +37,11 @@ public class FoodDetailActivity extends AppCompatActivity {
     private MaterialButton btnAddToCart;
     private RadioGroup rdgSize;
     private int quantity = 1;
-    private double totalMoney = 0, defaultPrice = 55000d;
+    private double totalMoney = 0, defaultPrice;
     private String size;
     private String idFood = "";
     private DatabaseReference reference;
+    private Food currFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +90,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Lấy ra size của sản phẩm
-                int sizeCheckedId = rdgSize.getCheckedRadioButtonId();
-                RadioButton radioSize = findViewById(sizeCheckedId);
-                size = radioSize.getText().toString();
-
-                Toast.makeText(FoodDetailActivity.this, "Order " + quantity + " size " + size + " total price " + totalMoney, Toast.LENGTH_SHORT).show();
+                addFoodToCart();
             }
         });
     }
@@ -113,18 +113,34 @@ public class FoodDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Food food = snapshot.getValue(Food.class);
+                    currFood = snapshot.getValue(Food.class);
 
                     // Set data for view
-                    Glide.with(FoodDetailActivity.this).load(food.getImageUrl()).into(imgFood);
-                    tvFoodName.setText(food.getName());
-                    tvFoodDesc.setText(food.getDescription());
-                    txtTotalMoney.setText(df.format(food.getPrice()) + "đ");
+                    Glide.with(FoodDetailActivity.this).load(currFood.getImageUrl()).into(imgFood);
+                    tvFoodName.setText(currFood.getName());
+                    tvFoodDesc.setText(currFood.getDescription());
+                    txtTotalMoney.setText(df.format(currFood.getPrice()) + "đ");
+
+                    defaultPrice = Double.valueOf(currFood.getPrice());
+                    totalMoney = Double.valueOf(currFood.getPrice());
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
+    }
+
+    private void addFoodToCart() {
+        DatabaseHandler db = new DatabaseHandler(this);
+        User currentUser = Preferences.getDataUser(this);
+        db.openDatabase(currentUser.getPhoneNumber());
+        // Lấy ra size của sản phẩm
+        int sizeCheckedId = rdgSize.getCheckedRadioButtonId();
+        RadioButton radioSize = findViewById(sizeCheckedId);
+        size = radioSize.getText().toString();
+
+        Cart cart = new Cart(idFood, currFood.getName(), currFood.getImageUrl(), quantity, size, totalMoney);
+        db.addToCart(cart);
     }
 }

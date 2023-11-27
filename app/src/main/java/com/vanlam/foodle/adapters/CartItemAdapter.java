@@ -37,33 +37,33 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     @Override
     public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
         Cart item = listItemCart.get(position);
-        final int[] quantity = {item.getQuantity()};
-        holder.getImageCartItem().setImageResource(item.getImagePath());
-        holder.getNameCartItem().setText(item.getName());
-        DecimalFormat df = new DecimalFormat("#,###.##");
-        holder.getPriceCartItem().setText(df.format(item.getPrice() * quantity[0]) + "đ");
+        //        final int[] quantity = {item.getQuantity()};
+//        holder.getImageCartItem().setImageResource(item.getImagePath());
+        holder.getNameCartItem().setText(item.getFoodName());
+//        DecimalFormat df = new DecimalFormat("#,###.##");
+//        holder.getPriceCartItem().setText(df.format(item.getPrice() * quantity[0]) + "đ");
         holder.getQtyCartItem().setText(String.valueOf(item.getQuantity()));
-        holder.getSpinnerSizeItem().setSelection(changeToSizeValue(item.getSize()));
+//        holder.getSpinnerSizeItem().setSelection(changeToSizeValue(item.getSize()));
 
-        holder.getImgIncrease().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                quantity[0]++;
-                holder.getQtyCartItem().setText(String.valueOf(quantity[0]));
-                holder.getPriceCartItem().setText(df.format(item.getPrice() * quantity[0]) + "đ");
-            }
-        });
-
-        holder.getImgDecrease().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (quantity[0] > 1) {
-                    quantity[0]--;
-                    holder.getQtyCartItem().setText(String.valueOf(quantity[0]));
-                    holder.getPriceCartItem().setText(df.format(item.getPrice() * quantity[0]) + "đ");
-                }
-            }
-        });
+//        holder.getImgIncrease().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                quantity[0]++;
+//                holder.getQtyCartItem().setText(String.valueOf(quantity[0]));
+//                holder.getPriceCartItem().setText(df.format(item.getPrice() * quantity[0]) + "đ");
+//            }
+//        });
+//
+//        holder.getImgDecrease().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (quantity[0] > 1) {
+//                    quantity[0]--;
+//                    holder.getQtyCartItem().setText(String.valueOf(quantity[0]));
+//                    holder.getPriceCartItem().setText(df.format(item.getPrice() * quantity[0]) + "đ");
+//                }
+//            }
+//        });
     }
 
     private int changeToSizeValue(String size) {

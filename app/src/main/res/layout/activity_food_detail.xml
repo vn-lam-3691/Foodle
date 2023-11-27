@@ -59,7 +59,7 @@
             android:id="@+id/image_favorite"
             android:layout_width="@dimen/_24sdp"
             android:layout_height="@dimen/_24sdp"
-            android:src="@drawable/ic_favorite"
+            android:src="@drawable/ic_menu_cart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd2"
             app:layout_constraintHorizontal_bias="0.5"

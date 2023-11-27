@@ -19,6 +19,8 @@ import com.google.android.material.button.MaterialButton;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.activities.CheckOutActivity;
 import com.vanlam.foodle.adapters.CartItemAdapter;
+import com.vanlam.foodle.adapters.Preferences;
+import com.vanlam.foodle.database.DatabaseHandler;
 import com.vanlam.foodle.models.Cart;
 
 import java.util.ArrayList;
@@ -49,24 +51,28 @@ public class CartFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         listItemCart = new ArrayList<>();
-        listItemCart.add(new Cart(R.drawable.img_food_item, 2, "Caramel Macchiato đá", "S", 55000d, true));
-        listItemCart.add(new Cart(R.drawable.capuchino_nong, 2, "Capuchino nóng", "M", 39000d, false));
-        listItemCart.add(new Cart(R.drawable.bac_xiu, 1, "Bạc sỉu", "L", 29000d, false));
-        listItemCart.add(new Cart(R.drawable.latte_da, 4, "Latte đá", "M", 49000d, false));
 
         tvTotalMoney = view.findViewById(R.id.tv_totalMoney);
         btnCheckout = view.findViewById(R.id.btn_checkout);
-
         rcvCartList = (RecyclerView) view.findViewById(R.id.recyclerView_car_list);
-        adapter = new CartItemAdapter(listItemCart);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         rcvCartList.setLayoutManager(linearLayoutManager);
-        rcvCartList.setAdapter(adapter);
+        loadItemCart();
+
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(view.getContext(), CheckOutActivity.class));
             }
         });
+    }
+
+    private void loadItemCart() {
+        DatabaseHandler db = new DatabaseHandler(getActivity().getApplicationContext());
+        db.openDatabase(Preferences.getDataUser(getActivity().getApplicationContext()).getPhoneNumber());
+        listItemCart = db.getCarts();
+        adapter = new CartItemAdapter(listItemCart);
+        rcvCartList.setAdapter(adapter);
     }
 }

@@ -3,29 +3,47 @@ package com.vanlam.foodle.models;
 import java.io.Serializable;
 
 public class Cart implements Serializable {
-    private int imagePath, quantity;
-    private String name, size;
-    private double price;
-    private boolean isSelected;
+    private String foodId;
+    private String foodName;
+    private String imageUrlFood;
+    private int quantity;
+    private String size;
+    private double foodPrice;
 
     public Cart() {
     }
 
-    public Cart(int imagePath, int quantity, String name, String size, double price, boolean isSelected) {
-        this.imagePath = imagePath;
+    public Cart(String foodId, String foodName, String imageUrlFood, int quantity, String size, double foodPrice) {
+        this.foodId = foodId;
+        this.foodName = foodName;
+        this.imageUrlFood = imageUrlFood;
         this.quantity = quantity;
-        this.name = name;
         this.size = size;
-        this.price = price;
-        this.isSelected = isSelected;
+        this.foodPrice = foodPrice;
     }
 
-    public int getImagePath() {
-        return imagePath;
+    public String getFoodId() {
+        return foodId;
     }
 
-    public void setImagePath(int imagePath) {
-        this.imagePath = imagePath;
+    public void setFoodId(String foodId) {
+        this.foodId = foodId;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public String getImageUrlFood() {
+        return imageUrlFood;
+    }
+
+    public void setImageUrlFood(String imageUrlFood) {
+        this.imageUrlFood = imageUrlFood;
     }
 
     public int getQuantity() {
@@ -36,14 +54,6 @@ public class Cart implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSize() {
         return size;
     }
@@ -52,19 +62,23 @@ public class Cart implements Serializable {
         this.size = size;
     }
 
-    public double getPrice() {
-        return price;
+    public double getFoodPrice() {
+        return foodPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setFoodPrice(double foodPrice) {
+        this.foodPrice = foodPrice;
     }
 
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "foodId='" + foodId + '\'' +
+                ", foodName='" + foodName + '\'' +
+                ", imageUrlFood='" + imageUrlFood + '\'' +
+                ", quantity=" + quantity +
+                ", size='" + size + '\'' +
+                ", foodPrice=" + foodPrice +
+                '}';
     }
 }
