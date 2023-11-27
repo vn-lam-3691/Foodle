@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
 import com.vanlam.foodle.models.Food;
+import com.vanlam.foodle.utils.CustomStaggeredGridLayoutManager;
 
 public class FoodListCfTraditionalFragment extends Fragment {
     private RecyclerView rcvFoodListCfTradition;
@@ -47,7 +48,7 @@ public class FoodListCfTraditionalFragment extends Fragment {
         fragmentManager = getActivity().getSupportFragmentManager();
         reference = FirebaseDatabase.getInstance().getReference();
 
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        CustomStaggeredGridLayoutManager staggeredGridLayoutManager = new CustomStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rcvFoodListCfTradition.setLayoutManager(staggeredGridLayoutManager);
 
         options = new FirebaseRecyclerOptions.Builder<Food>()

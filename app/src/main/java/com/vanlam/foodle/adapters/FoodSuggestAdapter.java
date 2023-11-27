@@ -1,5 +1,8 @@
 package com.vanlam.foodle.adapters;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
 import com.vanlam.foodle.R;
+import com.vanlam.foodle.activities.FoodDetailActivity;
 import com.vanlam.foodle.models.Food;
 
 import java.text.DecimalFormat;
@@ -33,12 +37,22 @@ public class FoodSuggestAdapter extends FirebaseRecyclerAdapter<Food, FoodSugges
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull FoodSuggestViewHolder holder, int position, @NonNull Food model) {
+    protected void onBindViewHolder(@NonNull FoodSuggestViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull Food model) {
         holder.getFoodName().setText(model.getName());
         DecimalFormat df = new DecimalFormat("#,###.##");
         holder.getFoodPrice().setText(df.format(model.getPrice()) + "đ");
 
         Glide.with(holder.itemView).load(model.getImageUrl()).into(holder.getFoodImage());
+
+        holder.getFoodImage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String idFood = getRef(position).getKey();
+                Intent intent = new Intent(view.getContext(), FoodDetailActivity.class);
+                intent.putExtra("idFood", idFood);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     public static class FoodSuggestViewHolder extends RecyclerView.ViewHolder {

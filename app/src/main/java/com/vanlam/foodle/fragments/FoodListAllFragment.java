@@ -28,6 +28,7 @@ import com.vanlam.foodle.activities.FoodDetailActivity;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
 import com.vanlam.foodle.listeners.FoodItemListener;
 import com.vanlam.foodle.models.Food;
+import com.vanlam.foodle.utils.CustomStaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class FoodListAllFragment extends Fragment {
         fragmentManager = getActivity().getSupportFragmentManager();
         reference = FirebaseDatabase.getInstance().getReference();
 
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        CustomStaggeredGridLayoutManager staggeredGridLayoutManager = new CustomStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rcvFoodListAll.setLayoutManager(staggeredGridLayoutManager);
 
         options = new FirebaseRecyclerOptions.Builder<Food>()

@@ -1,7 +1,9 @@
 package com.vanlam.foodle.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,34 +12,46 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.vanlam.foodle.R;
+import com.vanlam.foodle.models.Food;
 
 import java.text.DecimalFormat;
 
 public class FoodDetailActivity extends AppCompatActivity {
     private DecimalFormat df = new DecimalFormat("#,###.##");
-    private ImageView imgDecreaseQty, imgIncreaseQty;
-    private TextView txtQuantity, txtTotalMoney;
+    private ImageView imgDecreaseQty, imgIncreaseQty, imgBack;
+    private RoundedImageView imgFood;
+    private TextView txtQuantity, txtTotalMoney, tvFoodName, tvFoodDesc;
     private MaterialButton btnAddToCart;
     private RadioGroup rdgSize;
     private int quantity = 1;
     private double totalMoney = 0, defaultPrice = 55000d;
     private String size;
+    private String idFood = "";
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
 
-        txtQuantity = (TextView) findViewById(R.id.txt_quantity);
-        txtTotalMoney = (TextView) findViewById(R.id.txt_totalMoney);
-        imgDecreaseQty = (ImageView) findViewById(R.id.image_decrease);
-        imgIncreaseQty = (ImageView) findViewById(R.id.image_increase);
-        btnAddToCart = (MaterialButton) findViewById(R.id.btn_add_cart);
-        rdgSize = (RadioGroup) findViewById(R.id.rg_size);
-        ImageView imgBack = (ImageView) findViewById(R.id.image_back);
-        totalMoney = defaultPrice;
+        mapping();
+        reference = FirebaseDatabase.getInstance().getReference("Product");
+
+        if (getIntent() != null) {
+            idFood = getIntent().getStringExtra("idFood");
+            if (!idFood.isEmpty()) {
+                loadDetailFood(idFood);
+            }
+        }
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +95,36 @@ public class FoodDetailActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    private void mapping() {
+        txtQuantity = (TextView) findViewById(R.id.txt_quantity);
+        txtTotalMoney = (TextView) findViewById(R.id.txt_totalMoney);
+        imgDecreaseQty = (ImageView) findViewById(R.id.image_decrease);
+        imgIncreaseQty = (ImageView) findViewById(R.id.image_increase);
+        btnAddToCart = (MaterialButton) findViewById(R.id.btn_add_cart);
+        rdgSize = (RadioGroup) findViewById(R.id.rg_size);
+        imgBack = (ImageView) findViewById(R.id.image_back);
+        imgFood = (RoundedImageView) findViewById(R.id.image_food);
+        tvFoodName = (TextView) findViewById(R.id.txt_foodName);
+        tvFoodDesc = (TextView) findViewById(R.id.food_description);
+    }
+
+    private void loadDetailFood(String foodId) {
+        reference.child(foodId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Food food = snapshot.getValue(Food.class);
+
+                    // Set data for view
+                    Glide.with(FoodDetailActivity.this).load(food.getImageUrl()).into(imgFood);
+                    tvFoodName.setText(food.getName());
+                    tvFoodDesc.setText(food.getDescription());
+                    txtTotalMoney.setText(df.format(food.getPrice()) + "đ");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
     }
 }

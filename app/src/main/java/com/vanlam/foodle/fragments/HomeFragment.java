@@ -33,6 +33,8 @@ import com.vanlam.foodle.adapters.FoodSuggestAdapter;
 import com.vanlam.foodle.adapters.VoucherAdapter;
 import com.vanlam.foodle.models.Food;
 import com.vanlam.foodle.models.Voucher;
+import com.vanlam.foodle.utils.CustomLinearLayoutManager;
+import com.vanlam.foodle.utils.CustomStaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,17 +67,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         tbFood = FirebaseDatabase.getInstance().getReference();
 
         // Load danh sách vài sản phẩm lên phần Danh mục trong trang Home
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        CustomStaggeredGridLayoutManager staggeredGridLayoutManager = new CustomStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerViewFoodList.setLayoutManager(staggeredGridLayoutManager);
         LoadListFood();
 
         // Load vài sản phẩm lên phần Đề xuất
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        CustomLinearLayoutManager linearLayoutManager1 = new CustomLinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewFoodSuggest.setLayoutManager(linearLayoutManager1);
         LoadListFoodSuggest();
 
         // Load danh sách voucher
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        CustomLinearLayoutManager linearLayoutManager2 = new CustomLinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewVoucher.setLayoutManager(linearLayoutManager2);
         LoadListVoucher();
 
