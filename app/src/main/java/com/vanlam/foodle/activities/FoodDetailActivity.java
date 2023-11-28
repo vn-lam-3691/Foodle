@@ -140,7 +140,8 @@ public class FoodDetailActivity extends AppCompatActivity {
         RadioButton radioSize = findViewById(sizeCheckedId);
         size = radioSize.getText().toString();
 
-        Cart cart = new Cart(idFood, currFood.getName(), currFood.getImageUrl(), quantity, size, totalMoney);
+        Cart cart = new Cart(idFood, currFood.getName(), currFood.getImageUrl(), quantity, size, defaultPrice);
         db.addToCart(cart);
+        Toast.makeText(this, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
     }
 }

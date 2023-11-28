@@ -30,7 +30,7 @@ public class CartFragment extends Fragment {
     private List<Cart> listItemCart;
     private RecyclerView rcvCartList;
     private CartItemAdapter adapter;
-    private TextView tvTotalMoney;
+    private TextView tvTotalMoney, txtNotice;
     private MaterialButton btnCheckout;
     private View rootView;
 
@@ -52,6 +52,7 @@ public class CartFragment extends Fragment {
 
         listItemCart = new ArrayList<>();
 
+        txtNotice = view.findViewById(R.id.txt_cart_notice);
         tvTotalMoney = view.findViewById(R.id.tv_totalMoney);
         btnCheckout = view.findViewById(R.id.btn_checkout);
         rcvCartList = (RecyclerView) view.findViewById(R.id.recyclerView_car_list);
@@ -72,7 +73,13 @@ public class CartFragment extends Fragment {
         DatabaseHandler db = new DatabaseHandler(getActivity().getApplicationContext());
         db.openDatabase(Preferences.getDataUser(getActivity().getApplicationContext()).getPhoneNumber());
         listItemCart = db.getCarts();
-        adapter = new CartItemAdapter(listItemCart);
-        rcvCartList.setAdapter(adapter);
+        if (listItemCart.size() == 0) {
+            txtNotice.setVisibility(View.VISIBLE);
+        }
+        else {
+            txtNotice.setVisibility(View.GONE);
+            adapter = new CartItemAdapter(listItemCart);
+            rcvCartList.setAdapter(adapter);
+        }
     }
 }
