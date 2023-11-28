@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/image_checkout_item"
+        android:layout_width="@dimen/_105sdp"
+        android:layout_height="@dimen/_105sdp"
+        android:src="@drawable/img_food_item"
+        app:riv_corner_radius="@dimen/_6sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_name_checkout_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_medium"
+        android:text="Caramel Macchiato đá"
+        android:textSize="@dimen/_13ssp"
+        android:textColor="@color/colorTextPrimary"
+        android:lines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/image_checkout_item"
+        app:layout_constraintTop_toTopOf="@id/image_checkout_item"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_size_checkout_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/inter_regular"
+        android:text="Size:   S"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_checkout_item"
+        app:layout_constraintStart_toStartOf="@id/tv_name_checkout_item"/>
+
+    <TextView
+        android:id="@+id/txt_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/quantity"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/tv_size_checkout_item"
+        app:layout_constraintStart_toStartOf="@id/tv_name_checkout_item"/>
+
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_regular"
+        android:text="2 x "
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toEndOf="@id/txt_quantity"
+        app:layout_constraintTop_toTopOf="@id/txt_quantity"
+        app:layout_constraintBottom_toBottomOf="@id/txt_quantity"/>
+
+    <TextView
+        android:id="@+id/tv_price_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_regular"
+        android:text="55.000đ"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toEndOf="@id/tv_quantity"
+        app:layout_constraintTop_toTopOf="@id/txt_quantity"
+        app:layout_constraintBottom_toBottomOf="@id/txt_quantity"/>
+
+    <TextView
+        android:id="@+id/tv_price_total_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="110.000đ"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toBottomOf="@id/image_checkout_item"
+        app:layout_constraintStart_toStartOf="@id/tv_name_checkout_item"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

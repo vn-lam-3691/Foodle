@@ -1,8 +1,11 @@
 package com.vanlam.foodle.models;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import java.io.Serializable;
 
-public class Cart implements Serializable {
+public class Cart implements Serializable, Parcelable {
     private int cardId;
     private String foodId;
     private String foodName;
@@ -32,7 +35,27 @@ public class Cart implements Serializable {
         this.size = size;
         this.foodPrice = foodPrice;
     }
+    protected Cart(Parcel in) {
+        cardId = in.readInt();
+        foodId = in.readString();
+        foodName = in.readString();
+        imageUrlFood = in.readString();
+        quantity = in.readInt();
+        size = in.readString();
+        foodPrice = in.readDouble();
+    }
 
+    public static final Creator<Cart> CREATOR = new Creator<Cart>() {
+        @Override
+        public Cart createFromParcel(Parcel in) {
+            return new Cart(in);
+        }
+
+        @Override
+        public Cart[] newArray(int size) {
+            return new Cart[size];
+        }
+    };
     public int getCardId() {
         return cardId;
     }
@@ -100,4 +123,20 @@ public class Cart implements Serializable {
                 ", foodPrice=" + foodPrice +
                 '}';
     }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(cardId);
+        parcel.writeString(foodId);
+        parcel.writeString(foodName);
+        parcel.writeString(imageUrlFood);
+        parcel.writeInt(quantity);
+        parcel.writeString(size);
+        parcel.writeDouble(foodPrice);
+    }
 }
+

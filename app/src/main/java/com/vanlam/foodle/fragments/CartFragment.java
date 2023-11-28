@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,7 +70,7 @@ public class CartFragment extends Fragment implements OnCartItemSelectedListener
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), CheckOutActivity.class));
+                checkoutCart();
             }
         });
 
@@ -79,6 +80,23 @@ public class CartFragment extends Fragment implements OnCartItemSelectedListener
                 deleteCartItem();
             }
         });
+    }
+    private void checkoutCart() {
+        Intent intent = new Intent(rootView.getContext(), CheckOutActivity.class);
+        List<Integer> positionItemsCheckout = adapter.getListSelectedCart();
+        ArrayList<Cart> itemsCheckout = new ArrayList<>();
+
+        if (positionItemsCheckout.size() != 0) {
+            for (int pos : positionItemsCheckout) {
+                Cart item = adapter.getCartAtPosition(pos);
+                itemsCheckout.add(item);
+            }
+            intent.putParcelableArrayListExtra("listItemsCheckout", itemsCheckout);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(rootView.getContext(), "Chọn món cần thanh toán", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Thực hiện xóa các item đã được chọn trong Cart

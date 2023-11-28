@@ -10,7 +10,6 @@
         android:id="@+id/layout_top_heading"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_4sdp"
         android:layout_gravity="top">
 
         <androidx.constraintlayout.widget.Guideline
@@ -182,70 +181,18 @@
                 app:layout_constraintStart_toEndOf="@id/image_list_product"
                 app:layout_constraintTop_toTopOf="@id/image_list_product"
                 app:layout_constraintBottom_toBottomOf="@id/image_list_product"/>
-            
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/image_checkout_item"
-                android:layout_width="@dimen/_105sdp"
-                android:layout_height="@dimen/_105sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:src="@drawable/img_food_item"
-                app:riv_corner_radius="@dimen/_10sdp"
-                app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                app:layout_constraintTop_toBottomOf="@id/image_list_product"/>
-            
-            <TextView
-                android:id="@+id/tv_name_checkout_item"
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_checkout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:includeFontPadding="false"
-                android:fontFamily="@font/inter_medium"
-                android:text="Caramel Macchiato đá"
-                android:textSize="@dimen/_13ssp"
-                android:textColor="@color/colorTextPrimary"
-                android:lines="1"
-                android:ellipsize="end"
-                app:layout_constraintStart_toEndOf="@id/image_checkout_item"
-                app:layout_constraintTop_toTopOf="@id/image_checkout_item"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toBottomOf="@id/image_list_product"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
                 app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
 
-            <TextView
-                android:id="@+id/tv_size_checkout_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/inter_regular"
-                android:text="Size:   S"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintTop_toBottomOf="@id/tv_name_checkout_item"
-                app:layout_constraintStart_toStartOf="@id/tv_name_checkout_item"/>
 
-            <TextView
-                android:id="@+id/tv_quantity_checkout_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:fontFamily="@font/inter_regular"
-                android:text="Số lượng:   2 x 55.000đ"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintTop_toBottomOf="@id/tv_size_checkout_item"
-                app:layout_constraintStart_toStartOf="@id/tv_name_checkout_item"/>
-
-            <TextView
-                android:id="@+id/tv_price_checkout_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:fontFamily="@font/inter_semibold"
-                android:text="110.000đ"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toBottomOf="@id/image_checkout_item"
-                app:layout_constraintStart_toStartOf="@id/tv_name_checkout_item"/>
 
             <ImageView
                 android:id="@+id/image_take_note"
@@ -253,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:src="@drawable/ic_take_note"
-                app:layout_constraintTop_toBottomOf="@id/image_checkout_item"
+                app:layout_constraintTop_toBottomOf="@id/recyclerView_checkout"
                 app:layout_constraintStart_toStartOf="@id/guidelineStart"/>
 
             <TextView
