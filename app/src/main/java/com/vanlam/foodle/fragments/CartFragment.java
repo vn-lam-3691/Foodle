@@ -21,18 +21,21 @@ import com.vanlam.foodle.activities.CheckOutActivity;
 import com.vanlam.foodle.adapters.CartItemAdapter;
 import com.vanlam.foodle.adapters.Preferences;
 import com.vanlam.foodle.database.DatabaseHandler;
+import com.vanlam.foodle.listeners.OnCartItemSelectedListener;
 import com.vanlam.foodle.models.Cart;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements OnCartItemSelectedListener {
     private List<Cart> listItemCart;
     private RecyclerView rcvCartList;
     private CartItemAdapter adapter;
-    private TextView tvTotalMoney, txtNotice;
+    private TextView tvTotalMoney, txtNotice, tvDelete;
     private MaterialButton btnCheckout;
     private View rootView;
+    private DatabaseHandler db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,8 @@ public class CartFragment extends Fragment {
 
         listItemCart = new ArrayList<>();
 
+        db = new DatabaseHandler(getActivity().getApplicationContext());
+        tvDelete = view.findViewById(R.id.tv_delete_item);
         txtNotice = view.findViewById(R.id.txt_cart_notice);
         tvTotalMoney = view.findViewById(R.id.tv_totalMoney);
         btnCheckout = view.findViewById(R.id.btn_checkout);
@@ -67,10 +72,36 @@ public class CartFragment extends Fragment {
                 startActivity(new Intent(view.getContext(), CheckOutActivity.class));
             }
         });
+
+        tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteCartItem();
+            }
+        });
+    }
+
+    // Thực hiện xóa các item đã được chọn trong Cart
+    private void deleteCartItem() {
+        List<Integer> postList = adapter.getListSelectedCart();
+        if (postList.size() != 0) {
+            for (int position : postList) {
+                Cart cart = adapter.getCartAtPosition(position);
+                db.deleteCartItem(cart.getCardId());
+                listItemCart.remove(position);
+                adapter.notifyItemRemoved(position);
+            }
+            postList.clear();
+
+            if (listItemCart.size() == 0) {
+                txtNotice.setVisibility(View.VISIBLE);
+            }
+        }
+        tvTotalMoney.setText("0đ");
+        return;
     }
 
     private void loadItemCart() {
-        DatabaseHandler db = new DatabaseHandler(getActivity().getApplicationContext());
         db.openDatabase(Preferences.getDataUser(getActivity().getApplicationContext()).getPhoneNumber());
         listItemCart = db.getCarts();
         if (listItemCart.size() == 0) {
@@ -78,8 +109,21 @@ public class CartFragment extends Fragment {
         }
         else {
             txtNotice.setVisibility(View.GONE);
-            adapter = new CartItemAdapter(listItemCart);
+            adapter = new CartItemAdapter(listItemCart, this);
             rcvCartList.setAdapter(adapter);
         }
+    }
+
+    // Tính tổng tiền trong giỏ hàng
+    public void calculatorTotalCart() {
+        double totalPrice = adapter.calculatorTotalSelectedPrice();
+        DecimalFormat df = new DecimalFormat("#,###.##");
+        tvTotalMoney.setText(df.format(totalPrice) + "đ");
+    }
+
+    // Override lại phương thức của interface gọi tới từ CartItemAdapter
+    @Override
+    public void onItemSelectedChanged() {
+        calculatorTotalCart();
     }
 }

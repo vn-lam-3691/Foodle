@@ -63,7 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<Cart> getCarts() {
         final List<Cart> cartList = new ArrayList<>();
         Cursor cursor = null;
-        String[] column = {COLUMN_FOOD_ID, COLUMN_FOOD_NAME, COLUMN_FOOD_IMAGE, COLUMN_QUANTITY, COLUMN_SIZE, COLUMN_FOOD_PRICE};
+        String[] column = {COLUMN_ID, COLUMN_FOOD_ID, COLUMN_FOOD_NAME, COLUMN_FOOD_IMAGE, COLUMN_QUANTITY, COLUMN_SIZE, COLUMN_FOOD_PRICE};
 
         database.beginTransaction();
         try {
@@ -72,12 +72,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     do {
                         Cart item = new Cart();
-                        item.setFoodId(cursor.getString(0));
-                        item.setFoodName(cursor.getString(1));
-                        item.setImageUrlFood(cursor.getString(2));
-                        item.setQuantity(cursor.getInt(3));
-                        item.setSize(cursor.getString(4));
-                        item.setFoodPrice(Double.valueOf(cursor.getString(5)));
+                        item.setCardId(cursor.getInt(0));
+                        item.setFoodId(cursor.getString(1));
+                        item.setFoodName(cursor.getString(2));
+                        item.setImageUrlFood(cursor.getString(3));
+                        item.setQuantity(cursor.getInt(4));
+                        item.setSize(cursor.getString(5));
+                        item.setFoodPrice(Double.valueOf(cursor.getString(6)));
 
                         cartList.add(item);
                     } while (cursor.moveToNext());
@@ -108,5 +109,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void clearCart(String userId) {
         String sqlDelete = String.format("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_USER_ID + " = " + userId);
         database.execSQL(sqlDelete);
+    }
+
+    public void deleteCartItem(int cartId) {
+        String sqlDelete = String.format("DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + cartId);
+        database.execSQL(sqlDelete);
+    }
+
+    public void resetTableAndAutoIncrement() {
+        database.execSQL("DELETE FROM " + TABLE_NAME);
+
+        // Reset giá trị autoincrement
+        database.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + TABLE_NAME + "'");
+
+        // Đóng database sau khi đã hoàn thành
+        database.close();
+    }
+
+    public void updateCartItem(int idCart, String newSize, int newQuantity) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_QUANTITY, newQuantity);
+        values.put(COLUMN_SIZE, newSize);
+
+        database.update(TABLE_NAME, values, COLUMN_ID + " = ? AND " + COLUMN_USER_ID + " = ?", new String[] {String.valueOf(idCart), userId});
     }
 }

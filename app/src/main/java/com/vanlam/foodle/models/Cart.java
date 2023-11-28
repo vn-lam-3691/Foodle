@@ -3,6 +3,7 @@ package com.vanlam.foodle.models;
 import java.io.Serializable;
 
 public class Cart implements Serializable {
+    private int cardId;
     private String foodId;
     private String foodName;
     private String imageUrlFood;
@@ -20,6 +21,24 @@ public class Cart implements Serializable {
         this.quantity = quantity;
         this.size = size;
         this.foodPrice = foodPrice;
+    }
+
+    public Cart(int cardId, String foodId, String foodName, String imageUrlFood, int quantity, String size, double foodPrice) {
+        this.cardId = cardId;
+        this.foodId = foodId;
+        this.foodName = foodName;
+        this.imageUrlFood = imageUrlFood;
+        this.quantity = quantity;
+        this.size = size;
+        this.foodPrice = foodPrice;
+    }
+
+    public int getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
     }
 
     public String getFoodId() {

@@ -6,12 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CartFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_topHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
         android:layout_alignParentTop="true">
 
         <TextView
@@ -22,9 +20,26 @@
             android:text="@string/gio_hang_cua_ban"
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/_14ssp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_delete_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/inter_medium"
+            android:text="Xóa"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/colorRed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
