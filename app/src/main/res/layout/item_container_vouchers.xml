@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/layout_container_voucher"
     android:layout_marginBottom="@dimen/_10sdp">
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -56,14 +57,6 @@
         app:layout_constraintStart_toStartOf="@id/tv_voucher_name"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <CheckBox
-        android:id="@+id/cb_choose_voucher"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
-        android:buttonTint="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

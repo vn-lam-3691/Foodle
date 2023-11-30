@@ -300,6 +300,7 @@
                         android:id="@+id/title_voucher"
                         android:layout_width="@dimen/_90sdp"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_2sdp"
                         android:includeFontPadding="false"
                         android:fontFamily="@font/inter_regular"
                         android:text="@string/voucher_example"

@@ -1,5 +1,4 @@
 package com.vanlam.foodle.activities;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,41 +11,39 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-
+import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.adapters.CheckoutItemAdapter;
 import com.vanlam.foodle.models.Cart;
 import com.vanlam.foodle.models.User;
+import com.vanlam.foodle.models.Voucher;
+
 import java.util.ArrayList;
 import java.util.List;
-
 public class CheckOutActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_CHANGE_USER_INFORMATION = 1;
     public static final int REQUEST_CODE_PICK_VOUCHER = 2;
     private ImageView imgBack;
     private TextView tvChangeLocation, tvUserName, tvUserPhone, tvUserAddress;
     private MaterialButton btnOrder;
-
     private LinearLayout layoutMoreVoucher;
     private RecyclerView rcvCheckout;
     private CheckoutItemAdapter checkoutAdapter;
     private List<Cart> listItemCheckout;
     private User infoUser;
+    private Voucher infoVoucher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
         mapping();
-
         listItemCheckout = new ArrayList<>();
         if (getIntent() != null) {
             listItemCheckout = getIntent().getParcelableArrayListExtra("listItemsCheckout");
             loadItemsCheckout();
         }
-
         SpannableString content = new SpannableString("Thay đổi");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         tvChangeLocation.setText(content);
@@ -57,22 +54,18 @@ public class CheckOutActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_CHANGE_USER_INFORMATION);
             }
         });
-
-
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
-
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(CheckOutActivity.this, OrderSuccessActivity.class));
             }
         });
-
         layoutMoreVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,11 +84,9 @@ public class CheckOutActivity extends AppCompatActivity {
         tvUserPhone = findViewById(R.id.phone_cust);
         tvUserAddress = findViewById(R.id.address_cust);
     }
-
     private void loadItemsCheckout() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rcvCheckout.setLayoutManager(linearLayoutManager);
-
         checkoutAdapter = new CheckoutItemAdapter(listItemCheckout);
         rcvCheckout.setAdapter(checkoutAdapter);
     }
@@ -106,12 +97,25 @@ public class CheckOutActivity extends AppCompatActivity {
             tvUserAddress.setText(infoUser.getAddress());
         }
     }
+
+    public void setVoucherInfomation() {
+        if (infoVoucher != null) {
+            TextView tvVoucherName = findViewById(R.id.title_voucher);
+            tvVoucherName.setText(infoVoucher.getName());
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHANGE_USER_INFORMATION && resultCode == RESULT_OK) {
             infoUser = (User) data.getSerializableExtra("dataUser");
             setUserInformation();
+        }
+
+        if (requestCode == REQUEST_CODE_PICK_VOUCHER && resultCode == RESULT_OK) {
+            infoVoucher = (Voucher) data.getSerializableExtra("dataVoucher");
+            setVoucherInfomation();
         }
     }
 }
