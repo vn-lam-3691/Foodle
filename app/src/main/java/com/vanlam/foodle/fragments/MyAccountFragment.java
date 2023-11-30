@@ -11,17 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
+import android.widget.LinearLayout;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.activities.SignInActivity;
+import com.vanlam.foodle.activities.UserInformationActivity;
 import com.vanlam.foodle.adapters.Preferences;
 
 public class MyAccountFragment extends Fragment {
     private ImageView imgSignOut;
+    private LinearLayout layoutSavedLocation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -33,6 +37,14 @@ public class MyAccountFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        layoutSavedLocation = view.findViewById(R.id.layout_saved_location);
+        layoutSavedLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), UserInformationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         imgSignOut = view.findViewById(R.id.image_sign_out);
         imgSignOut.setOnClickListener(new View.OnClickListener() {

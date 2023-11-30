@@ -49,14 +49,14 @@
             android:textColor="@color/colorTextPrimary"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/image_favorite"
+            app:layout_constraintEnd_toStartOf="@+id/image_create_new"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/image_back"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.444" />
 
         <ImageView
-            android:id="@+id/image_favorite"
+            android:id="@+id/image_create_new"
             android:layout_width="@dimen/_24sdp"
             android:layout_height="@dimen/_24sdp"
             android:src="@drawable/ic_take_note"

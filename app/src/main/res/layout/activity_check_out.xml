@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
                     android:fontFamily="@font/inter_regular"
-                    android:text="Truong Van Lam"
+
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorTextSecond"/>
 
@@ -141,7 +141,7 @@
                     android:layout_marginTop="@dimen/_4sdp"
                     android:includeFontPadding="false"
                     android:fontFamily="@font/inter_regular"
-                    android:text="0384586xxx"
+                    android:text="Vui lòng chọn / thay đổi thông tin nhận hàng"
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorTextSecond"/>
 
@@ -152,7 +152,7 @@
                     android:layout_marginTop="@dimen/_4sdp"
                     android:includeFontPadding="false"
                     android:fontFamily="@font/inter_regular"
-                    android:text="Hoàng Diệu, Bình Hiên, Hải Châu, Đà Nẵng"
+
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorTextSecond"
                     android:maxLines="2"
