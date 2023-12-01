@@ -26,34 +26,24 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.958" />
 
-        <ImageView
-            android:id="@+id/image_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:src="@drawable/ic_location"
-            app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/app_name" />
-
         <LinearLayout
             android:id="@+id/location_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@id/image_location"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintEnd_toStartOf="@id/image_notification"
-            app:layout_constraintTop_toTopOf="@id/image_location"
-            app:layout_constraintBottom_toBottomOf="@id/image_location"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0">
 
             <TextView
+                android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:fontFamily="@font/inter_semibold"
-                android:text="@string/delivery_to"
+                android:text="Xin chào, Phillips"
                 android:textSize="@dimen/_12ssp"
                 android:textColor="@color/colorPrimary"/>
 
@@ -65,7 +55,7 @@
                 android:fontFamily="@font/inter_regular"
                 android:lines="1"
                 android:ellipsize="end"
-                android:text="@string/location_example"
+                android:text="Bạn muốn uống gì hôm nay nào!"
                 android:textSize="@dimen/_12ssp"
                 android:textColor="@color/colorTextSecond"/>
 
@@ -98,7 +88,7 @@
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:background="@drawable/background_input_search"
-            app:layout_constraintTop_toBottomOf="@id/image_location"
+            app:layout_constraintTop_toBottomOf="@id/location_info"
             app:layout_constraintStart_toStartOf="@id/guidelineStart"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd">
 

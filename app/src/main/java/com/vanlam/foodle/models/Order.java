@@ -12,6 +12,7 @@ public class Order implements Serializable {
     private double totalPayment;
     private String orderTime;
     private String userId;
+    private String orderStatus;
 
     public Order() {
     }
@@ -25,6 +26,9 @@ public class Order implements Serializable {
         this.totalPayment = totalPayment;
         this.orderTime = orderTime;
         this.userId = userId;
+
+        // 1 - Chờ xác nhận ; 2 - Đã hủy đơn hàng ; 3 - Đã xác nhận ; 4 - Đang giao hàng ; 5 - Giao hàng thành công
+        this.orderStatus = "1";
     }
 
     public String getReceiverName() {
@@ -89,5 +93,13 @@ public class Order implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

@@ -30,6 +30,7 @@ import com.google.firebase.database.Query;
 import com.vanlam.foodle.R;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
 import com.vanlam.foodle.adapters.FoodSuggestAdapter;
+import com.vanlam.foodle.adapters.Preferences;
 import com.vanlam.foodle.adapters.VoucherAdapter;
 import com.vanlam.foodle.models.Food;
 import com.vanlam.foodle.models.Voucher;
@@ -80,6 +81,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         CustomLinearLayoutManager linearLayoutManager2 = new CustomLinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewVoucher.setLayoutManager(linearLayoutManager2);
         LoadListVoucher();
+
+        TextView tvUserName = rootView.findViewById(R.id.tv_user_name);
+        tvUserName.setText("Xin chào, " + Preferences.getDataUser(getContext()).getName());
 
         return rootView;
     }

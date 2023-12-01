@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.vanlam.foodle.R;
+import com.vanlam.foodle.activities.OrderManagementActivity;
 import com.vanlam.foodle.activities.SignInActivity;
 import com.vanlam.foodle.activities.UserInformationActivity;
 import com.vanlam.foodle.adapters.Preferences;
@@ -20,6 +23,8 @@ import com.vanlam.foodle.adapters.Preferences;
 public class MyAccountFragment extends Fragment {
     private ImageView imgSignOut;
     private LinearLayout layoutSavedLocation;
+    private LinearLayout layoutHistoryOrder;
+    private TextView tvUserName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,17 @@ public class MyAccountFragment extends Fragment {
                 signOutAccount();
             }
         });
+
+        layoutHistoryOrder = view.findViewById(R.id.layout_history_order);
+        layoutHistoryOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), OrderManagementActivity.class));
+            }
+        });
+
+        tvUserName = view.findViewById(R.id.name_account);
+        tvUserName.setText(Preferences.getDataUser(getContext()).getName());
     }
 
     private void signOutAccount() {
