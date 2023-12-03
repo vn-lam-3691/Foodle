@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "643378688147",
+    "firebase_url": "https://foodle-c86ef-default-rtdb.firebaseio.com",
+    "project_id": "foodle-c86ef",
+    "storage_bucket": "foodle-c86ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643378688147:android:68749f2e5799690652dd66",
+        "android_client_info": {
+          "package_name": "com.vanlam.foodle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD87kZ_BGODFChAkZfpGP4NlTGFt7jq9ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643378688147:android:07a69004f68585f252dd66",
+        "android_client_info": {
+          "package_name": "com.vanlam.server"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD87kZ_BGODFChAkZfpGP4NlTGFt7jq9ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
