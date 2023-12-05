@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Foodle Server</string>
+    <string name="don_hang">Đơn hàng</string>
+    <string name="thuc_don">Thực đơn</string>
+    <string name="person">Tôi</string>
+    <string name="tiep_tuc">Tiếp tục</string>
+    <string name="chao_mung">Chào mừng trở lại</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

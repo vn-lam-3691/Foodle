@@ -1,4 +1,7 @@
-package com.vanlam.foodle.activities;
+package com.vanlam.foodleserver.activities;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,17 +19,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.vanlam.foodle.R;
-import com.vanlam.foodle.adapters.Preferences;
-import com.vanlam.foodle.models.User;
+import com.vanlam.foodleserver.R;
+import com.vanlam.foodleserver.models.User;
+import com.vanlam.foodleserver.utils.Preferences;
 
 public class SignInActivity extends AppCompatActivity {
     private MaterialButton btnSignIn;
-    private TextView txtSignUp;
     private EditText etPhoneNumber, etPassword;
+    private CheckBox cbRemember;
     private FirebaseDatabase database;
     private DatabaseReference tbUser;
-    private CheckBox cbRemember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         btnSignIn = findViewById(R.id.btn_signIn);
-        txtSignUp = findViewById(R.id.txt_signUpNow);
         etPhoneNumber = findViewById(R.id.input_phoneNumber);
         etPassword = findViewById(R.id.input_password);
         cbRemember = findViewById(R.id.cb_rememberMe);
@@ -45,21 +43,14 @@ public class SignInActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         tbUser = database.getReference("Users");
 
-        btnSignIn.setOnClickListener(new View.OnClickListener(){
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signInAccount();
             }
         });
-
-        txtSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
     }
+
     private void signInAccount() {
         // Validate input data
         if (etPhoneNumber.getText().toString().equals("") && etPassword.getText().toString().equals("")) {
@@ -95,7 +86,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     User user = snapshot.child(etPhoneNumber.getText().toString()).getValue(User.class);
-                    if (user != null && user.getRole().equals("user")) {
+                    if (user != null && user.getRole().equals("partner")) {
                         if (user.getPassword().equals(etPassword.getText().toString())) {
                             if (cbRemember.isChecked()) {
                                 // Lưu lại trạng thái tùy chọn là Remember me
@@ -145,5 +136,4 @@ public class SignInActivity extends AppCompatActivity {
         Gson gson = new Gson();
         return gson.toJson(user);
     }
-
 }

@@ -119,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }, 3000);
                 }
                 else {
-                    User user = new User(0,username, phoneNumber, null, password, false);
+                    User user = new User(0,username, phoneNumber, null, password, false, "user");
                     tbUser.child(phoneNumber).setValue(user);
 
                     Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);

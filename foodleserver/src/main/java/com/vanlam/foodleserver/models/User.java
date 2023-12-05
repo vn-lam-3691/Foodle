@@ -1,4 +1,4 @@
-package com.vanlam.foodle.models;
+package com.vanlam.foodleserver.models;
 
 import java.io.Serializable;
 
