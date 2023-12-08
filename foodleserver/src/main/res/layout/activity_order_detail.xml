@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.OrderDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_top_heading"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_gravity="top">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.042" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.958" />
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semibold"
+            android:includeFontPadding="false"
+            android:text="@string/chi_tiet_don_hang"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart2"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd2"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_body_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_36sdp"
+        android:layout_marginBottom="@dimen/_58sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_14sdp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.042" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.958" />
+
+            <LinearLayout
+                android:id="@+id/layout_info_receiver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingBottom="@dimen/_4sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart1"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/thong_tin_nguoi_nhan"
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/tv_receiver_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Nguyễn Văn A"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextSecond"/>
+
+                <TextView
+                    android:id="@+id/tv_receiver_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="0987654321"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextSecond"/>
+
+                <TextView
+                    android:id="@+id/tv_receiver_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Bình Hiên, Hải Châu, Đà Nẵng"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorTextSecond"
+                    android:maxLines="3"
+                    android:ellipsize="end"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_food_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@id/layout_info_receiver"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart1"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/food_list"
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/colorPrimary"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_orders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:clipToPadding="false"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_order_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/ghi_chu"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/layout_food_list"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart1"/>
+
+            <TextView
+                android:id="@+id/tv_order_note"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/inter_regular"
+                android:textColor="@color/colorTextSecond"
+                android:text="Shop bỏ ít đá cho em"
+                android:textSize="@dimen/_12ssp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                app:layout_constraintTop_toBottomOf="@id/txt_order_note"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart1"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd1"/>
+
+            <TextView
+                android:id="@+id/txt_order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/inter_medium"
+                android:text="Mã đơn hàng"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/tv_order_note"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart1"/>
+
+            <TextView
+                android:id="@+id/tv_order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/inter_regular"
+                android:textSize="@dimen/_12ssp"
+                android:text="#12345678"
+                android:textColor="@color/colorTextSecond"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd1"
+                app:layout_constraintTop_toTopOf="@id/txt_order_id"
+                app:layout_constraintBottom_toBottomOf="@id/txt_order_id"/>
+
+            <TextView
+                android:id="@+id/txt_order_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/inter_medium"
+                android:text="Thời gian đặt hàng"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/txt_order_id"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart1"/>
+
+            <TextView
+                android:id="@+id/tv_order_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/inter_regular"
+                android:textSize="@dimen/_12ssp"
+                android:text="#12345678"
+                android:textColor="@color/colorTextSecond"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd1"
+                app:layout_constraintTop_toTopOf="@id/txt_order_time"
+                app:layout_constraintBottom_toBottomOf="@id/txt_order_time"/>
+
+            <TextView
+                android:id="@+id/txt_order_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/total_payment"
+                android:textSize="@dimen/_13ssp"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/txt_order_time"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart1"/>
+
+            <TextView
+                android:id="@+id/tv_total_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/inter_semibold"
+                android:textSize="@dimen/_14ssp"
+                android:text="110.000đ"
+                android:textColor="@color/colorTextPrimary"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd1"
+                app:layout_constraintTop_toTopOf="@id/txt_order_payment"
+                app:layout_constraintBottom_toBottomOf="@id/txt_order_payment"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_gravity="bottom"
+        android:visibility="visible"
+        android:background="@drawable/background_bottom_nav">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/inter_semibold"
+            android:includeFontPadding="false"
+            android:text="Xác nhận"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_10ssp"
+            app:cornerRadius="@dimen/_8sdp"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            app:icon="@drawable/ic_check"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/inter_semibold"
+            android:includeFontPadding="false"
+            android:text="@string/tu_choi"
+            android:textColor="@color/colorTextSecond"
+            android:textSize="@dimen/_10ssp"
+            app:cornerRadius="@dimen/_8sdp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="@dimen/_1sdp"
+            app:icon="@drawable/ic_cancel"
+            app:iconTint="@color/colorPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_confirm"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_completed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:fontFamily="@font/inter_semibold"
+            android:includeFontPadding="false"
+            android:text="Chuẩn bị đơn hàng hoàn tất"
+            android:textSize="@dimen/_12ssp"
+            app:cornerRadius="@dimen/_8sdp"
+            android:visibility="gone"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

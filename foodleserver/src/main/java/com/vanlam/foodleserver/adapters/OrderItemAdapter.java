@@ -1,6 +1,7 @@
 package com.vanlam.foodleserver.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
 import com.vanlam.foodleserver.R;
+import com.vanlam.foodleserver.activities.OrderDetailActivity;
 import com.vanlam.foodleserver.models.Cart;
 import com.vanlam.foodleserver.models.Order;
 
@@ -69,6 +71,15 @@ public class OrderItemAdapter extends FirebaseRecyclerAdapter<Order, OrderItemAd
 
         // Set List sản phẩm cho ListView để hiển thị lên
         holder.setDataListOrder(model.getOrderList());
+        holder.getBtnDetail().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, OrderDetailActivity.class);
+                intent.putExtra("orderId", orderId);
+                intent.putExtra("orderData", model);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     public static class OrderItemViewHolder extends RecyclerView.ViewHolder {

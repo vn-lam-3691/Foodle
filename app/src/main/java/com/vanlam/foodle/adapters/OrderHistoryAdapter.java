@@ -58,7 +58,15 @@ public class OrderHistoryAdapter extends FirebaseRecyclerAdapter<Order, OrderHis
                 break;
             case "3":
                 holder.getBtnCancel().setVisibility(View.GONE);
-                status = "Giao hàng thành công";
+                status = "Đã xác nhận";
+                break;
+            case "4":
+                holder.getBtnCancel().setVisibility(View.GONE);
+                status = "Đang giao hàng";
+                break;
+            case "5":
+                holder.getBtnCancel().setVisibility(View.GONE);
+                status = "Đơn hàng thành công";
                 break;
         }
         holder.getTvOrderStatus().setText(status);

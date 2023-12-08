@@ -11,4 +11,23 @@
     <string name="tong_tien">Tổng tiền</string>
     <string name="ma_donhang">Mã đơn hàng</string>
     <string name="time_dathang">Thời gian đặt hàng</string>
+    <string name="name_acc_test">Foodle Shop</string>
+    <string name="txt_ranking">Cửa hàng chính</string>
+    <string name="lich_su_don_hang">Lịch sử đơn hàng</string>
+    <string name="my_voucher">Voucher của cửa hàng</string>
+    <string name="list_favorite">Sản phẩm yêu thích</string>
+    <string name="my_notification">Thông báo của tôi</string>
+    <string name="contact">Liên hệ và góp ý</string>
+    <string name="my_info">Thông tin cửa hàng</string>
+    <string name="saved_location">Địa chỉ đã lưu</string>
+    <string name="txt_settings">Cài đặt</string>
+    <string name="uu_dai_van_chuyen">Ưu đãi phí vận chuyển</string>
+    <string name="uu_dai_giam_gia">Ưu đãi giảm giá</string>
+    <string name="khong_co_don">Không có đơn hàng nào!</string>
+    <string name="chi_tiet_don_hang">Chi tiết đơn hàng</string>
+    <string name="thong_tin_nguoi_nhan">Thông tin người nhận</string>
+    <string name="food_list">Danh sách món</string>
+    <string name="ghi_chu">Ghi chú đơn hàng</string>
+    <string name="total_payment">Tổng tiền quán nhận</string>
+    <string name="tu_choi">Từ chối</string>
 </resources>

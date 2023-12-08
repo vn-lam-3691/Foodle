@@ -1,5 +1,6 @@
 package com.vanlam.foodleserver.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.vanlam.foodleserver.R;
 import com.vanlam.foodleserver.adapters.OrderItemAdapter;
 import com.vanlam.foodleserver.models.Order;
+import com.vanlam.foodleserver.utils.CustomLinearLayoutManager;
 
 public class WaitConfirmFragment extends Fragment {
     private DatabaseReference reference;
@@ -41,7 +43,7 @@ public class WaitConfirmFragment extends Fragment {
         reference = FirebaseDatabase.getInstance().getReference("Orders");
 
         rcvWaitConfirm = rootView.findViewById(R.id.recyclerView_wait_confirm);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rcvWaitConfirm.setLayoutManager(layoutManager);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
