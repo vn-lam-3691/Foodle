@@ -15,7 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
 import com.vanlam.foodle.R;
-import com.vanlam.foodle.listeners.HandleCancelOrder;
+import com.vanlam.foodle.listeners.HandleOrder;
 import com.vanlam.foodle.models.Cart;
 import com.vanlam.foodle.models.Order;
 
@@ -23,12 +23,12 @@ import java.util.List;
 
 public class OrderHistoryAdapter extends FirebaseRecyclerAdapter<Order, OrderHistoryAdapter.OrderHistoryViewHolder> {
     public static Context mContext;
-    private HandleCancelOrder cancelOrder;
+    private HandleOrder handleOrder;
 
-    public OrderHistoryAdapter(@NonNull FirebaseRecyclerOptions<Order> options, Context context, HandleCancelOrder cancel) {
+    public OrderHistoryAdapter(@NonNull FirebaseRecyclerOptions<Order> options, Context context, HandleOrder cancel) {
         super(options);
         this.mContext = context;
-        this.cancelOrder = cancel;
+        this.handleOrder = cancel;
     }
 
     @NonNull
@@ -62,6 +62,7 @@ public class OrderHistoryAdapter extends FirebaseRecyclerAdapter<Order, OrderHis
                 break;
             case "4":
                 holder.getBtnCancel().setVisibility(View.GONE);
+                holder.getBtnReceived().setVisibility(View.VISIBLE);
                 status = "Đang giao hàng";
                 break;
             case "5":
@@ -74,7 +75,15 @@ public class OrderHistoryAdapter extends FirebaseRecyclerAdapter<Order, OrderHis
         holder.getBtnCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancelOrder.cancelOrder(orderId);
+                handleOrder.cancelOrder(orderId);
+            }
+        });
+
+        holder.getBtnReceived().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleOrder.receivedOrder(orderId);
+                holder.getBtnReceived().setVisibility(View.GONE);
             }
         });
     }
@@ -82,7 +91,7 @@ public class OrderHistoryAdapter extends FirebaseRecyclerAdapter<Order, OrderHis
     public static class OrderHistoryViewHolder extends RecyclerView.ViewHolder {
         private TextView tvOrderId, tvOrderTime, tvOrderStatus;
         private RecyclerView rcvOrderItems;
-        private MaterialButton btnCancel;
+        private MaterialButton btnCancel, btnReceived;
 
         public OrderHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +100,7 @@ public class OrderHistoryAdapter extends FirebaseRecyclerAdapter<Order, OrderHis
             tvOrderStatus = itemView.findViewById(R.id.tv_status_order);
             rcvOrderItems = itemView.findViewById(R.id.recyclerView_order_items);
             btnCancel = itemView.findViewById(R.id.btn_cancel_order);
+            btnReceived = itemView.findViewById(R.id.btn_received);
         }
 
         public void setDataForListItems(List<Cart> listItems) {
@@ -138,6 +148,14 @@ public class OrderHistoryAdapter extends FirebaseRecyclerAdapter<Order, OrderHis
 
         public void setBtnCancel(MaterialButton btnCancel) {
             this.btnCancel = btnCancel;
+        }
+
+        public MaterialButton getBtnReceived() {
+            return btnReceived;
+        }
+
+        public void setBtnReceived(MaterialButton btnReceived) {
+            this.btnReceived = btnReceived;
         }
     }
 }

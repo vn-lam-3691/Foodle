@@ -12,6 +12,9 @@
             android:name=".activities.OrderDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.SignInActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>

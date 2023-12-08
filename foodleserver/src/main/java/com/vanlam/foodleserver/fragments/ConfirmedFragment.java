@@ -15,8 +15,11 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.vanlam.foodleserver.R;
 import com.vanlam.foodleserver.adapters.OrderItemAdapter;
 import com.vanlam.foodleserver.models.Order;
@@ -41,6 +44,19 @@ public class ConfirmedFragment extends Fragment {
     public void onStart() {
         super.onStart();
         adapter.startListening();
+
+        // Cập nhật dữ liệu trong RecyclerView
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
     }
 
     @Override

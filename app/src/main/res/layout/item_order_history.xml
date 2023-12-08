@@ -68,7 +68,7 @@
             android:fontFamily="@font/inter_semibold"
             android:text="Trạng thái đơn hàng"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_13ssp"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recyclerView_order_items"/>
 
@@ -95,6 +95,22 @@
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             app:cornerRadius="@dimen/_10sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_status_order"
+            app:layout_constraintTop_toTopOf="@id/txt_status_order"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_received"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đã nhận hàng"
+            android:textSize="@dimen/_12ssp"
+            android:backgroundTint="@color/colorPrimary"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            app:cornerRadius="@dimen/_10sdp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_status_order"
             app:layout_constraintTop_toTopOf="@id/txt_status_order"/>
