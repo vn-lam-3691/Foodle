@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Foodle">
         <activity
+            android:name=".activities.FoodInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.OrderDetailActivity"
             android:exported="false" />
         <activity
