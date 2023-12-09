@@ -46,7 +46,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintTop_toBottomOf="@id/tv_name_cartItem"
         app:layout_constraintStart_toStartOf="@id/tv_name_cartItem"/>
-    
+
     <Spinner
         android:id="@+id/spinner_size"
         android:layout_width="@dimen/_80sdp"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-    
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,7 +103,8 @@
 
         <TextView
             android:id="@+id/quantity_cartItem"
-            android:layout_width="@dimen/_24sdp"
+            android:layout_width="wrap_content"
+            android:maxEms="3"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:fontFamily="@font/inter_medium"
@@ -117,7 +118,7 @@
             android:layout_height="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_8sdp"
             android:src="@drawable/ic_add"/>
-        
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
