@@ -1,6 +1,7 @@
 package com.vanlam.foodleserver.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.vanlam.foodleserver.R;
+import com.vanlam.foodleserver.activities.FoodInformationActivity;
 import com.vanlam.foodleserver.models.Food;
 
 import java.text.DecimalFormat;
@@ -44,6 +46,28 @@ public class FoodItemAdapter extends FirebaseRecyclerAdapter<Food, FoodItemAdapt
         holder.getTvFoodPrice().setText(df.format(model.getPrice()) + "đ");
 
         Glide.with(holder.itemView).load(model.getImageUrl()).into(holder.getImageFood());
+
+        holder.getImgEdit().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, FoodInformationActivity.class);
+                intent.putExtra("contextCall", "modifyFood");
+                intent.putExtra("foodId", foodId);
+                intent.putExtra("foodData", model);
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.getImgDelete().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, FoodInformationActivity.class);
+                intent.putExtra("contextCall", "modifyFood");
+                intent.putExtra("foodId", foodId);
+                intent.putExtra("foodData", model);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     public static class FoodItemViewHolder extends RecyclerView.ViewHolder {
@@ -58,6 +82,7 @@ public class FoodItemAdapter extends FirebaseRecyclerAdapter<Food, FoodItemAdapt
             tvFoodPrice = itemView.findViewById(R.id.food_price);
             imageFood = itemView.findViewById(R.id.food_image);
             imgEdit = itemView.findViewById(R.id.image_edit);
+            imgDelete = itemView.findViewById(R.id.image_delete);
         }
 
         public TextView getTvFoodName() {

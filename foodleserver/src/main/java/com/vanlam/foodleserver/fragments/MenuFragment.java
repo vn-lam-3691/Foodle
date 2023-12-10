@@ -41,7 +41,9 @@ public class MenuFragment extends Fragment {
         fabCreateNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), FoodInformationActivity.class));
+                Intent intent = new Intent(getContext(), FoodInformationActivity.class);
+                intent.putExtra("contextCall", "addNewFood");
+                startActivity(intent);
             }
         });
 
