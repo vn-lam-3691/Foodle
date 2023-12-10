@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_container_voucher"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_10sdp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img_voucher"
+        android:layout_width="@dimen/_95sdp"
+        android:layout_height="@dimen/_95sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="@dimen/_8sdp" />
+
+    <TextView
+        android:id="@+id/tv_voucher_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_medium"
+        android:text="Freeship đồng giá 39K"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@color/colorTextPrimary"
+        android:lines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/img_voucher"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_voucher_expiry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_regular"
+        android:text="HSD:  31/10/2023"
+        android:textSize="@dimen/_11ssp"
+        android:textColor="@color/colorTextSecond"
+        app:layout_constraintStart_toStartOf="@id/tv_voucher_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_voucher_name"/>
+
+    <TextView
+        android:id="@+id/tv_voucher_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_regular"
+        android:text="Giảm giá:  10%"
+        android:textSize="@dimen/_11ssp"
+        android:textColor="@color/colorTextSecond"
+        app:layout_constraintStart_toStartOf="@id/tv_voucher_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_voucher_expiry"/>
+
+    <TextView
+        android:id="@+id/tv_voucher_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_regular"
+        android:text="Loại voucher:  Shipping"
+        android:textSize="@dimen/_11ssp"
+        android:textColor="@color/colorTextSecond"
+        app:layout_constraintStart_toStartOf="@id/tv_voucher_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_voucher_discount"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

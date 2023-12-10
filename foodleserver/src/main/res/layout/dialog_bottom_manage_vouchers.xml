@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_manage_voucher"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_dialog_bottom"
+    android:paddingStart="@dimen/_12sdp"
+    android:paddingTop="@dimen/_12sdp"
+    android:paddingEnd="@dimen/_12sdp"
+    android:paddingBottom="@dimen/_10sdp">
+
+    <ImageView
+        android:id="@+id/ic_take_note"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:src="@drawable/ic_take_note"
+        app:layout_constraintEnd_toStartOf="@+id/tv_title_dialog"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:fontFamily="@font/inter_medium"
+        android:includeFontPadding="false"
+        android:text="Tạo voucher mới"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ic_take_note"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ic_take_note"
+        app:layout_constraintTop_toTopOf="@id/ic_take_note" />
+
+    <TextView
+        android:id="@+id/txt_voucher_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:text="Tên voucher"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ic_take_note" />
+
+    <EditText
+        android:id="@+id/et_voucher_name"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_34sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@drawable/background_input_search"
+        android:hint="VD: Khuyến mãi khách hàng mới"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:textColor="@color/colorTextPrimary"
+        android:textColorHint="#9F9F9F"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_voucher_name" />
+
+    <TextView
+        android:id="@+id/txt_voucher_expiry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:text="Hạn sử dụng"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_voucher_name" />
+
+    <EditText
+        android:id="@+id/et_voucher_expiry"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_34sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@drawable/background_input_search"
+        android:hint="VD: 31/12/2023"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:textColor="@color/colorTextPrimary"
+        android:textColorHint="#9F9F9F"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_voucher_expiry" />
+
+    <TextView
+        android:id="@+id/txt_voucher_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:text="Giảm giá"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_voucher_expiry" />
+
+    <EditText
+        android:id="@+id/et_voucher_discount"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_34sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@drawable/background_input_search"
+        android:hint="VD: 10%"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:textColor="@color/colorTextPrimary"
+        android:textColorHint="#9F9F9F"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_voucher_discount" />
+
+    <TextView
+        android:id="@+id/txt_voucher_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:text="Mô tả"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_voucher_discount" />
+
+    <EditText
+        android:id="@+id/et_voucher_desc"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_66sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@drawable/background_input_search"
+        android:gravity="top"
+        android:hint="Nhập mô tả..."
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:padding="@dimen/_8sdp"
+        android:textColor="@color/colorTextPrimary"
+        android:textColorHint="#9F9F9F"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_voucher_desc" />
+
+    <TextView
+        android:id="@+id/txt_voucher_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:text="Loại voucher"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_voucher_desc" />
+
+    <Spinner
+        android:id="@+id/spn_voucher_type"
+        style="@style/CustomTextSpinner"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_26sdp"
+        android:layout_marginStart="@dimen/_90sdp"
+        android:background="@drawable/background_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/txt_voucher_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txt_voucher_type"
+        app:layout_constraintTop_toTopOf="@id/txt_voucher_type" />
+
+    <TextView
+        android:id="@+id/txt_choose_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:text="Hình ảnh"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_voucher_type" />
+
+    <TextView
+        android:id="@+id/tv_choose_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:fontFamily="@font/inter_regular"
+        android:includeFontPadding="false"
+        android:text="Chọn hình ảnh"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_11ssp"
+        app:layout_constraintStart_toStartOf="@id/txt_choose_image"
+        app:layout_constraintTop_toBottomOf="@id/txt_choose_image" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/image_voucher"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="@id/spn_voucher_type"
+        app:layout_constraintTop_toBottomOf="@+id/spn_voucher_type"
+        app:riv_corner_radius="@dimen/_2sdp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_create_new"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="@font/inter_medium"
+        android:text="Tạo mới"
+        android:textSize="@dimen/_12ssp"
+        android:visibility="gone"
+        app:cornerRadius="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_voucher" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_modify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:backgroundTint="@color/colorPrimary"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_medium"
+        android:text="Cập nhật"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_10ssp"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        app:icon="@drawable/ic_edit"
+        android:visibility="visible"
+        app:cornerRadius="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_delete"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_voucher" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/inter_medium"
+        android:text="Xóa"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/_10ssp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        app:strokeColor="@color/colorRed"
+        app:strokeWidth="@dimen/_1sdp"
+        app:icon="@drawable/ic_delete"
+        app:iconTint="@color/colorRed"
+        android:visibility="visible"
+        app:cornerRadius="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_modify"
+        app:layout_constraintTop_toBottomOf="@id/image_voucher" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

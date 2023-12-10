@@ -12,4 +12,9 @@
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
+    <style name="DialogStyle" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
 </resources>

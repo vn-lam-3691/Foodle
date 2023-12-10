@@ -11,16 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vanlam.foodleserver.R;
-
+import com.vanlam.foodleserver.activities.ManageVoucherActivity;
 import com.vanlam.foodleserver.activities.SignInActivity;
 import com.vanlam.foodleserver.utils.Preferences;
 
 public class MyAccountFragment extends Fragment {
     private ImageView imgSignOut;
     private TextView tvPartnerName;
+    private LinearLayout layoutManageVouchers;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,5 +51,13 @@ public class MyAccountFragment extends Fragment {
 
         tvPartnerName = view.findViewById(R.id.name_account);
         tvPartnerName.setText(Preferences.getDataUser(getContext()).getName());
+
+        layoutManageVouchers = view.findViewById(R.id.layout_my_voucher);
+        layoutManageVouchers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ManageVoucherActivity.class));
+            }
+        });
     }
 }
