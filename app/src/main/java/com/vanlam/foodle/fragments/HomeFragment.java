@@ -1,6 +1,7 @@
 package com.vanlam.foodle.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.vanlam.foodle.R;
+import com.vanlam.foodle.activities.SearchFoodActivity;
 import com.vanlam.foodle.adapters.FoodItemAdapter;
 import com.vanlam.foodle.adapters.FoodSuggestAdapter;
 import com.vanlam.foodle.adapters.Preferences;
@@ -53,6 +55,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private LinearLayout itmCate1, itmCate2, itmCate3, itmCate4, itmCate5;
     public static int idCategory = 1;
     public static ProgressBar progressLoad;
+    private LinearLayout layoutSearch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        layoutSearch = view.findViewById(R.id.layout_input_search);
+        layoutSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), SearchFoodActivity.class));
+            }
+        });
     }
 
     @Override

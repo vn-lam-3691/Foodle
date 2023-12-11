@@ -43,22 +43,16 @@
                 android:src="@drawable/ic_search"
                 android:layout_gravity="center_vertical"/>
 
-            <EditText
-                android:id="@+id/input_search"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_gravity="center_vertical"
-                android:background="@null"
                 android:includeFontPadding="false"
-                android:imeOptions="actionGo"
-                android:importantForAutofill="no"
-                android:inputType="text"
                 android:fontFamily="@font/inter_regular"
-                android:textSize="@dimen/_12sdp"
-                android:hint="@string/hint_search"
-                android:textColorHint="#696969"
-                android:textColor="@color/colorTextSecond"/>
+                android:text="@string/hint_search"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="#696969"
+                android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
 
